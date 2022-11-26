@@ -1,0 +1,114 @@
+; This is the Calva evaluation results output window.
+; TIPS: The keyboard shortcut `ctrl+alt+o o` shows and focuses this window
+;   when connected to a REPL session.
+; Please see https://calva.io/output/ for more info.
+; Happy coding! ♥️
+
+; Jacking in...
+; Starting Jack-in Terminal: npx shadow-cljs -d cider/cider-nrepl:0.28.5 watch
+; Interrupting Jack-in process.
+; Connecting ...
+; No nrepl port file found.
+; Hooking up nREPL sessions...
+; Connecting ...
+; No nrepl port file found.
+; Jacking in...
+; Starting Jack-in Terminal: npx shadow-cljs -d cider/cider-nrepl:0.28.5 watch :app
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉shadow.user꞉>  ; Use `alt+enter` to evaluate
+; Creating cljs repl session...
+; Connecting cljs repl: shadow-cljs...
+;   The Calva Connection Log might have more connection progress information.
+; Connected session: cljs, repl: :app
+; TIPS: You can choose which REPL to use (clj or cljs):
+;    *Calva: Toggle REPL connection*
+;    (There is a button in the status bar for this)
+; Jack-in done.
+cljs꞉cljs.user꞉>  ; Use `alt+enter` to evaluate
+nil
+cljs꞉app.core꞉> 
+nil
+cljs꞉app.core꞉> 
+nil
+; ------ WARNING - :undeclared-ns ------------------------------------------------
+;  Resource: <eval>:1:2
+;  No such namespace: shadow.cljs.devtools.api, could not locate shadow/cljs/devtools/api.cljs, shadow/cljs/devtools/api.cljc, or JavaScript source providing "shadow.cljs.devtools.api"
+; --------------------------------------------------------------------------------
+; 
+; 
+; ------ WARNING - :undeclared-var -----------------------------------------------
+;  Resource: <eval>:1:2
+;  Use of undeclared Var shadow.cljs.devtools.api/nrepl-select
+; --------------------------------------------------------------------------------
+; 
+cljs꞉app.core꞉> 
+; nREPL Connection was closed
+; Connecting ...
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉shadow.user꞉> 
+; Creating cljs repl session...
+; Connecting cljs repl: shadow-cljs...
+;   The Calva Connection Log might have more connection progress information.
+
+(+ 1 2)
+3
+clj꞉shadow.user꞉> 
+; Failed starting cljs repl for build: :app. Is the build running and connected?
+   See the Output channel "Calva Connection Log" for any hints on what went wrong.
+(+ 1 2)
+3
+clj꞉shadow.user꞉> 
+; Connecting ...
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉shadow.user꞉> 
+; Creating cljs repl session...
+; Connecting cljs repl: shadow-cljs...
+;   The Calva Connection Log might have more connection progress information.
+; Execution error (ExceptionInfo) at shadow.cljs.devtools.server.nrepl-impl/repl-init (nrepl_impl.clj:28).
+watch for build not running
+; Error while connecting cljs REPL: TypeError: Cannot read properties of undefined (reading 'search')
+; nREPL Connection was closed
+; Connecting ...
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉shadow.user꞉> 
+; Creating cljs repl session...
+; Connecting cljs repl: shadow-cljs...
+;   The Calva Connection Log might have more connection progress information.
+; Execution error (ExceptionInfo) at shadow.cljs.devtools.server.nrepl-impl/repl-init (nrepl_impl.clj:28).
+watch for build not running
+; Error while connecting cljs REPL: TypeError: Cannot read properties of undefined (reading 'search')
+; Evaluating file: core.cljs
+; Jacking in...
+; Starting Jack-in Terminal: npx shadow-cljs -d cider/cider-nrepl:0.28.5 watch :app

@@ -1,14 +1,24 @@
 (ns app.core
-  "This namespace contains your application and is the entrypoint for 'yarn start'."
   (:require [reagent.core :as r]
-            [app.hello :refer [hello]]))
+            [app.components.content :refer [content]]
+            [app.components.menu :refer [menu]]))
 
-(defn ^:dev/after-load render
-  "Render the toplevel component for this app."
+
+(defn app 
   []
-  (r/render [hello] (.getElementById js/document "app")))
+  [:div.container
+   [menu]
+   [content]])
+
 
 (defn ^:export main
   "Run application startup logic."
   []
-  (render))
+  (r/render 
+   [app] 
+   (.getElementById js/document "app")))
+
+
+(comment
+  (shadow.cljs.devtools.api/nrepl-select :app)
+  )
