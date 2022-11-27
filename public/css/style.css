@@ -105,12 +105,15 @@ header {
 .panel {
   background-color: #f8fcfe;
   color: #111821;
-  display: grid;
-  grid-template-columns: 10% 20% 70%;
-  padding: 0 15px 0 15px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: 10% 20% 70%;
+  padding: 15px;
 }
 
 .free-column {

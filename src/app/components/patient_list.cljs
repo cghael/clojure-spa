@@ -24,12 +24,13 @@
                     [:div oms-number]
                     [:div.open-hidden (when (= id @activ-id) {:style {:visibility "visible"
                                                                       :transform "rotate(180deg)"}}) "\u02C5"]]
-                   [:div.panel (when (= @activ-id id) {:style
+                   [:div.panel (when (= @activ-id id) {:style ;; TODO переделать на .getElementById (третья форма компонентов)
                                                        {:max-height (.-scrollHeight (first (.getElementsByClassName js/document "panel")))}})
-                    [:div.free-column]
-                    [:div {:style {:padding "15px 0 15px 0"}} "Adress:"]
-                    [:div {:style {:padding "15px 0 15px 0"}} adress]
-                    [:div {:style {:padding "15px 0 15px 0"}}  "Birth date:"]
-                    [:div {:style {:padding "15px 0 15px 0"}} birth]
-                    [:div {:style {:padding "15px 0 15px 0"}} "Sex:"]
-                    [:div {:style {:padding "15px 0 15px 0"}} sex]]])))])))
+                    [:div.panel-grid
+                     [:div.free-column]
+                    [:div #_{:style {:padding "15px 0 15px 0"}} "Adress:"]
+                    [:div #_{:style {:padding "15px 0 15px 0"}} adress]
+                    [:div #_{:style {:padding "15px 0 15px 0"}}  "Birth date:"]
+                    [:div #_{:style {:padding "15px 0 15px 0"}} birth]
+                    [:div #_{:style {:padding "15px 0 15px 0"}} "Sex:"]
+                    [:div #_{:style {:padding "15px 0 15px 0"}} sex]]]])))])))
