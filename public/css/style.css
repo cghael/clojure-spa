@@ -22,8 +22,6 @@ time, mark, audio, video {
 }
 
 .container {
-  /* margin-left: auto;
-  margin-right: auto; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -85,24 +83,9 @@ header {
   border-left: 2px solid #36506c;
   border-right: 2px solid #36506c;
   color: #111821;
-  /* background-color: #ebf7fd;
-  border-bottom: 1px solid #36506c;
-  border-left: 2px solid #36506c;
-  border-right: 2px solid #36506c;
-  color: #111821;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: 10% 40% 25% 23% 2%;
-  padding: 15px;
-  transition: all .2s linear; */
 }
 
 .patient-main {
-  /* background-color: #ebf7fd;
-  border-bottom: 1px solid #36506c;
-  border-left: 2px solid #36506c;
-  border-right: 2px solid #36506c;
-  color: #111821; */
   cursor: pointer;
   display: grid;
   grid-template-columns: 10% 40% 25% 23% 2%;
@@ -120,17 +103,19 @@ header {
 }
 
 .panel {
-  background-color: #ebf7fd;
-  /* border-bottom: 1px solid #36506c;
-  border-left: 2px solid #36506c;
-  border-right: 2px solid #36506c; */
+  background-color: #f8fcfe;
   color: #111821;
   display: grid;
-  grid-template-columns: 30% 30% 40%;
-  /* padding: 15px; */
+  grid-template-columns: 10% 20% 70%;
+  padding: 0 15px 0 15px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+}
+
+.free-column {
+  grid-row-start: 1;
+  grid-row-end: 4;
 }
 
 .patient:first-child {
@@ -153,10 +138,6 @@ header {
   color: #ebf7fd;
 }
 
-.patient:hover .open-hidden {
-  visibility: visible;
-}
-
 /* pages */
 
 .pages {
@@ -168,7 +149,6 @@ header {
   justify-content: space-between;
   margin-left: auto;
   margin-right: auto;
-  /* padding-bottom: 50px; */
   max-width: 800px;
 }
 
