@@ -7,9 +7,9 @@
 
 (defn content
   []
-  (let [page-number (r/atom 1)]
+  (let [*page-number (r/atom 1)]
     (fn []
       [:div.content
        [header]
-       [patient-list page-number]
-       [pages page-number]])))
+       [patient-list *page-number]
+       [pages *page-number]])))

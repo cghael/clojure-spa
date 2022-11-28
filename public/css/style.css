@@ -32,14 +32,45 @@ time, mark, audio, video {
 .menu {
   background-color: #233142;
   color: #ebf7fd;
-  height: 100%;
-  padding-top: 20px;
+  height: 100vh;
+  /* padding: 20px 0 20px 0; */
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
   overflow-x: hidden;
   width: 100px;
+}
+
+.menu-flex {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Courier New', Courier, monospace;
+  height: 95vh;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 20px 0;
+}
+
+.menu-buttons {
+  padding-top: 100px;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: #ebf7fd82;
+  font-size: 1.2rem;
+  height: 50px;
+  padding: .45rem .6rem;
+  /* vertical-align: center; */
+  transition: all .2s ease;
+  width: 100%;
+}
+
+.menu-btn.active {
+  color: #ebf7fd;
+  cursor: pointer;
 }
 
 .content {
@@ -181,4 +212,82 @@ header {
   font-size: 1.2rem;
   font-weight: bold;
   padding: .45rem .6rem;
+}
+
+/* patient-editor */
+
+.patient-window__underlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: #23314284;
+  display: none;
+}
+
+.patient-window__underlay.active {
+  display: flex;
+}
+
+@keyframes patient-window-appear {
+  from {top:-100px;opacity: 0;}
+  to {top:0px;opacity:1;}
+}
+
+.patient-window {
+  background-color: #ebf7fd;
+  bottom: 0;
+  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  border: 3px solid #233142;
+  max-width: 500px;
+  margin: auto;
+  max-height: 600px;
+  padding: 3px;
+
+  animation-name: patient-window-appear;
+  animation-duration: 0.5s;
+}
+
+.patient-window__body {
+  display: flex;
+  color: #111821;
+  border: 3px solid #111821;
+  padding: .4rem;
+}
+
+.patient-window__footer {
+  /* border: 3px solid #7e1c50; */
+  /* color: #7e1c50; */
+  padding: .4rem;
+  height: 10%;
+  min-height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.window-btn {
+  background: none;
+  border: none;
+  color: #47698e65;
+  font-size: 1.2rem;
+  height: 50px;
+  padding: .45rem .6rem;
+  vertical-align: center;
+  transition: all .2s ease;
+  width: 150px;
+  cursor: pointer;
+}
+
+.window-btn:hover {
+  font-size: 1.4rem;
 }

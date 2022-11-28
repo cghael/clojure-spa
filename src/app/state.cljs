@@ -2,6 +2,8 @@
   (:require [reagent.core :as r]))
 
 
+(def *activ-id (r/atom nil))
+
 (def *patients (r/atom {:count 16
                         :content {:p-01 {:id :p-01
                                          :name "Andrey"
