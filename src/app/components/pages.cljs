@@ -11,7 +11,7 @@
     "< BACK"]
    [:p.p-number @*page-number]
    [:button.page-btn
-    (when (<= (* @*page-number 10) (:count @state/*patients))
+    (when (<= (* @*page-number 10) (:patient-number @state/*patients))
       {:class "active"
        :on-click #(swap! *page-number inc)})
     "NEXT >"]])

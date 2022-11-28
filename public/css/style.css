@@ -320,11 +320,13 @@ header {
   padding: 0.4rem;
 }
 
-.form__lable {
-  padding: 0.4rem 0;
+.form__label {
+  padding: 0.2rem 0;
 }
 
 .form__input {
   font-family: 'Courier New', Courier, monospace;
-  padding: 0.2rem 0;
+  padding: 0.4rem;
+  border-radius: 3px;
+  border: 2px solid #354a63;
 }

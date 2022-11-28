@@ -4,7 +4,7 @@
 
 (def *activ-id (r/atom nil))
 
-(def *patients (r/atom {:count 16
+(def *patients (r/atom {:patient-number 16
                         :content {:p-01 {:id :p-01
                                          :name "Andrey"
                                          :s-name "Pospelov"
