@@ -30,7 +30,8 @@
           "Update"]
          [:button.menu-btn (when @state/*activ-id {:class "active"})
           "Delete"]]
-        [patient-editor {:*patient-window *patient-window 
+        [patient-editor {:status "Add new patient"
+                         :*patient-window *patient-window 
                          :*patient-values *patient-values
                          :initial-values initial-values
                          :toggle-patient-window toggle-patient-window}]

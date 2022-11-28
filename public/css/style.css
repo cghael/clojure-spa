@@ -236,9 +236,10 @@ header {
 }
 
 .patient-window {
-  background-color: #ebf7fd;
+  background-color: #e7f6fd;
+  border-radius: 3px;
   bottom: 0;
-  box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 0px 20px 6px rgb(0 0 0 / 40%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -246,7 +247,7 @@ header {
   position: fixed;
   right: 0;
   top: 0;
-  border: 3px solid #233142;
+  /* border: 3px solid #233142; */
   max-width: 500px;
   margin: auto;
   max-height: 600px;
@@ -256,11 +257,28 @@ header {
   animation-duration: 0.5s;
 }
 
+.patient-window:hover {
+  background-color: #ebf7fd;
+  border: 2px solid #36506c;
+  border-radius: 5px;
+}
+
 .patient-window__body {
   display: flex;
+  flex-direction: column;
   color: #111821;
-  border: 3px solid #111821;
+  /* border: 3px solid #111821; */
   padding: .4rem;
+  height: 80%;
+  min-height: 300px;
+}
+
+.patient-window__status {
+  color: #354a63;
+  font-family: 'Arial';
+  font-size: 1.4rem;
+  align-self: center;
+  padding: 0.4rem;
 }
 
 .patient-window__footer {
@@ -290,4 +308,23 @@ header {
 
 .window-btn:hover {
   font-size: 1.4rem;
+}
+
+/* form */
+
+.form {
+  font-family: 'Arial';
+  display: flex;
+  flex-direction: column;
+  color: #354a63;
+  padding: 0.4rem;
+}
+
+.form__lable {
+  padding: 0.4rem 0;
+}
+
+.form__input {
+  font-family: 'Courier New', Courier, monospace;
+  padding: 0.2rem 0;
 }
