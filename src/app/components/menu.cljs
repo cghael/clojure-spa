@@ -20,8 +20,10 @@
                                 (reset! *patient-window active)
                                 (reset! *patient-values patient))
         save-patient (fn [{:keys [id name s-name sex birth adress oms-number]}]
-                       (let [id-number (:patient-number @state/*patients)]
-                         (swap! state/*patients assoc-in [:content id] {:id (or id (str "p-" (inc id-number)))
+                       (let [id-number (:patient-number @state/*patients)
+                             id (or id (str "p-" (inc id-number)))
+                             _ (.log js/console id)]
+                         (swap! state/*patients assoc-in [:content id] {:id id #_(or id (str "p-" (inc id-number)))
                                                                         :name (string/trim name)
                                                                         :s-name (string/trim s-name)
                                                                         :sex (string/trim sex)
