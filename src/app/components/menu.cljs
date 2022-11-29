@@ -21,9 +21,8 @@
                                 (reset! *patient-values patient))
         save-patient (fn [{:keys [id name s-name sex birth adress oms-number]}]
                        (let [id-number (:patient-number @state/*patients)
-                             id (or id (str "p-" (inc id-number)))
-                             _ (.log js/console id)]
-                         (swap! state/*patients assoc-in [:content id] {:id id #_(or id (str "p-" (inc id-number)))
+                             id (or id (str "p-" (inc id-number)))]
+                         (swap! state/*patients assoc-in [:content id] {:id id
                                                                         :name (string/trim name)
                                                                         :s-name (string/trim s-name)
                                                                         :sex (string/trim sex)
@@ -32,9 +31,7 @@
                                                                         :oms-number (string/trim oms-number)})
                          (swap! state/*patients update :patient-number inc)
                          (toggle-patient-window {:active false
-                                                 :patient initial-values}))
-                       (.log js/console (:patient-number @state/*patients))
-                       (.log js/console (:content @state/*patients)))]
+                                                 :patient initial-values})))]
     (fn []
       [:div.menu
        [:div.menu-flex
@@ -43,7 +40,10 @@
           {:on-click #(toggle-patient-window {:active true
                                               :patient initial-values})}
           "Create"]
-         [:button.menu-btn (when @state/*activ-id {:class "active"})
+         [:button.menu-btn (when @state/*activ-id 
+                             {:class "active"
+                              :on-click #(toggle-patient-window {:active true
+                                                                 :patient @state/*activ-id})})
           "Update"]
          [:button.menu-btn (when @state/*activ-id {:class "active"})
           "Delete"]]
