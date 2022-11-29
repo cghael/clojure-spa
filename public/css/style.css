@@ -73,6 +73,11 @@ time, mark, audio, video {
   cursor: pointer;
 }
 
+.menu-btn.active:hover {
+  color: #f6fcfe;
+  font-size: 1.3rem;
+}
+
 .content {
   margin-left: 100px;
   width: 100%;
@@ -329,4 +334,42 @@ header {
   padding: 0.4rem;
   border-radius: 3px;
   border: 2px solid #354a63;
+}
+
+/* delete */
+
+.patient-delete {
+  background-color: #e7f6fd;
+  border-radius: 3px;
+  bottom: 0;
+  box-shadow: 0 0px 20px 6px rgb(0 0 0 / 40%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  max-width: 300px;
+  margin: auto;
+  max-height: 200px;
+  padding: 3px;
+
+  animation-name: patient-window-appear;
+  animation-duration: 0.5s;
+}
+
+.patient-delete:hover {
+  background-color: #ebf7fd;
+  border: 2px solid #36506c;
+  border-radius: 5px;
+}
+
+.patient-delete__body {
+  color: #354a63;
+  font-family: 'Arial';
+  font-size: 1.2rem;
+  align-self: center;
+  padding: 2rem;
+  text-align: center;
 }
