@@ -1,6 +1,5 @@
 (ns app.components.patient-list
-  (:require [app.state :as state]
-            [reagent.core :as r]))
+  (:require [app.state :as state]))
 
 (defn patient-list
   [page-number]
@@ -16,8 +15,7 @@
                                                   :oms-number oms-number})))]
     (fn []
       [:div.patients
-       (let [display-patients (take 10 (drop (* 10 (- @page-number 1)) (:content @state/*patients)))
-             add-fields (- 10 (count display-patients))] ;;TODO add fields
+       (let [display-patients (take 10 (drop (* 10 (- @page-number 1)) (:content @state/*patients)))]
          (doall (for [{:keys [id name s-name sex birth adress oms-number] :as patient} (vals display-patients)]
                   [:div.patient {:key id}
                    [:div.patient-main (if (= id (:id @state/*activ-id))

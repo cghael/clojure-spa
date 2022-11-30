@@ -33,7 +33,6 @@ time, mark, audio, video {
   background-color: #233142;
   color: #ebf7fd;
   height: 100vh;
-  /* padding: 20px 0 20px 0; */
   position: fixed;
   z-index: 1;
   top: 0;
@@ -63,7 +62,6 @@ time, mark, audio, video {
   font-size: 1.2rem;
   height: 50px;
   padding: .45rem .6rem;
-  /* vertical-align: center; */
   transition: all .2s ease;
   width: 100%;
   text-align: left;
@@ -260,7 +258,6 @@ header {
   position: fixed;
   right: 0;
   top: 0;
-  /* border: 3px solid #233142; */
   max-width: 500px;
   margin: auto;
   max-height: 600px;
@@ -280,7 +277,6 @@ header {
   display: flex;
   flex-direction: column;
   color: #111821;
-  /* border: 3px solid #111821; */
   padding: .4rem;
   height: 80%;
   min-height: 300px;
@@ -295,8 +291,6 @@ header {
 }
 
 .patient-window__footer {
-  /* border: 3px solid #7e1c50; */
-  /* color: #7e1c50; */
   padding: .4rem;
   height: 10%;
   min-height: 20px;
