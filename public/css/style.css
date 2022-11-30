@@ -66,6 +66,7 @@ time, mark, audio, video {
   /* vertical-align: center; */
   transition: all .2s ease;
   width: 100%;
+  text-align: left;
 }
 
 .menu-btn.active {
@@ -81,6 +82,7 @@ time, mark, audio, video {
 .content {
   margin-left: 100px;
   width: 100%;
+  position: relative;
 }
 
 header {
@@ -89,12 +91,13 @@ header {
   position: sticky;
   text-align: center;
   top: 0;
+  max-height: 100px;
 }
 
 .logo {
   width: 25vw;
-  min-width: 160px;
-  max-width: 380px;
+  min-width: 100px;
+  max-width: 300px;
 }
 
 .img__bottom {
@@ -177,6 +180,10 @@ header {
   color: #ebf7fd;
 }
 
+.patient-main:hover .open-hidden {
+  visibility: visible;
+}
+
 /* pages */
 
 .pages {
@@ -189,6 +196,7 @@ header {
   margin-left: auto;
   margin-right: auto;
   max-width: 800px;
+  padding-bottom: 1rem;
 }
 
 .page-btn {

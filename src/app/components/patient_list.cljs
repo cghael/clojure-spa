@@ -26,7 +26,7 @@
                     [:div id]
                     [:div s-name]
                     [:div name]
-                    [:div oms-number]
+                    [:div {:style {:overflow "hidden"}} oms-number]
                     [:div.open-hidden (when (= id (:id @state/*activ-id)) 
                                         {:style {:visibility "visible" 
                                                  :transform "rotate(180deg)"}}) 
