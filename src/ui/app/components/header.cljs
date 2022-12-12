@@ -1,4 +1,4 @@
-(ns app.components.header)
+(ns ui.app.components.header)
 
 (defn header
   []

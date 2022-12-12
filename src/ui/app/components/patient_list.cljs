@@ -1,8 +1,8 @@
-(ns app.components.patient-list
-  (:require [app.state :as state]))
+(ns ui.app.components.patient-list
+  (:require [ui.app.state :as state]))
 
 (defn patient-list
-  [page-number]
+  []
   (let [toggle-activ (fn [{:keys [id name s-name sex birth adress oms-number]}]
                        (if (= id (:id @state/*activ-id))
                          (reset! state/*activ-id nil)
@@ -15,7 +15,7 @@
                                                   :oms-number oms-number})))]
     (fn []
       [:div.patients
-       (let [display-patients (take 10 (drop (* 10 (- @page-number 1)) (:content @state/*patients)))]
+       (let [display-patients (:current-page @state/*patients)]
          (doall (for [{:keys [id name s-name sex birth adress oms-number] :as patient} (vals display-patients)]
                   [:div.patient {:key id}
                    [:div.patient-main (if (= id (:id @state/*activ-id))

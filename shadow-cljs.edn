@@ -1,13 +1,15 @@
 {:builds
  {:app {:asset-path "/js"
-        :modules {:main {:init-fn app.core/main}}
-        :output-dir "public/js"
+        :modules {:main {:init-fn ui.app.core/main}}
+        :output-dir "resources/public/js"
         :target :browser}}
  
  :dependencies [[reagent "0.8.1"]
-                [devcards "0.2.6"]]
+                [devcards "0.2.6"]
+                [cljs-ajax "0.7.5"]
+                [binaryage/devtools "0.9.10"]]
  
- :dev-http {3000 "public"}
+ :dev-http {3000 "resources/public"}
  
  :nrepl {:port 3333}
  

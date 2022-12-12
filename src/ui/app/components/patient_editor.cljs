@@ -1,4 +1,4 @@
-(ns app.components.patient-editor)
+(ns ui.app.components.patient-editor)
 
 
 (defn form-return

@@ -1,7 +1,8 @@
-(ns app.core
+(ns ui.app.core
   (:require [reagent.core :as r]
-            [app.components.content :refer [content]]
-            [app.components.menu :refer [menu]]))
+            [ui.app.components.content :refer [content]]
+            [ui.app.components.menu :refer [menu]]
+            [ui.app.api :as api]))
 
 
 (defn app 
@@ -14,6 +15,7 @@
 (defn ^:export main
   "Run application startup logic."
   []
+  (api/patient-list)
   (r/render 
    [app] 
    (.getElementById js/document "app")))

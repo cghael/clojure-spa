@@ -1,8 +1,8 @@
-(ns app.components.menu
-  (:require [app.state :as state]
+(ns ui.app.components.menu
+  (:require [ui.app.state :as state]
             [reagent.core :as r]
-            [app.components.delete-modal :refer [delete-modal]]
-            [app.components.patient-editor :refer [patient-editor]]
+            [ui.app.components.delete-modal :refer [delete-modal]]
+            [ui.app.components.patient-editor :refer [patient-editor]]
             [clojure.string :as string]))
 
 
@@ -23,7 +23,7 @@
                                 (reset! *patient-values patient))
         toggle-delete-window #(reset! *patient-delete %)
         save-patient (fn [{:keys [id name s-name sex birth adress oms-number]}]
-                       (let [id-number (:patient-number @state/*patients)
+                       (let [id-number (:patient-number @state/*patients) ;;TODO patient-number no more
                              id (or id (str "p-" (inc id-number)))]
                          (swap! state/*patients assoc-in [:content id] {:id id
                                                                         :name (string/trim name)
@@ -32,18 +32,22 @@
                                                                         :birth birth
                                                                         :adress (string/trim adress)
                                                                         :oms-number (string/trim oms-number)})
-                         (swap! state/*patients update :patient-number inc)
+                         (swap! state/*patients update :patient-number inc) ;;TODO patient-number no more
                          (toggle-patient-window {:active false
                                                  :patient initial-values})))
         delete-patient (fn []
                          (swap! state/*patients update-in [:content] dissoc (:id @state/*activ-id))
-                         (swap! state/*patients update :patient-number dec)
+                         (swap! state/*patients update :patient-number dec) ;;TODO patient-number no more
                          (reset! state/*activ-id nil)
                          (toggle-delete-window false))]
     (fn []
       [:div.menu
        [:div.menu-flex
         [:div.menu-buttons
+         [:button.menu-btn.active ;;TODO logic
+          {:on-click #(toggle-patient-window {:active true
+                                              :patient initial-values})}
+          "Search"]
          [:button.menu-btn.active
           {:on-click #(toggle-patient-window {:active true
                                               :patient initial-values})}
@@ -62,8 +66,7 @@
                          :*patient-values *patient-values
                          :initial-values initial-values
                          :toggle-patient-window toggle-patient-window
-                         :save-patient save-patient}]
-        (.log js/console @*patient-delete)
+                         :save-patient save-patient}] 
         [delete-modal {:*patient-delete *patient-delete
                        :toggle-delete-window toggle-delete-window
                        :delete-patient delete-patient}]

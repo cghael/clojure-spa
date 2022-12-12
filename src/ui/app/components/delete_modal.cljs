@@ -1,5 +1,5 @@
-(ns app.components.delete-modal 
-  (:require [app.state :as state]))
+(ns ui.app.components.delete-modal 
+  (:require [ui.app.state :as state]))
 
 
 (defn delete-modal
