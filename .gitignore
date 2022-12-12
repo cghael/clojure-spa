@@ -8,3 +8,5 @@ yarn-error.log
 report.html
 .lsp/.cache
 .calva/output-window
+resources/public/js
+target
