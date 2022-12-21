@@ -28,9 +28,7 @@
 
 (defn save-patient
   [{:keys [id name s-name sex birth adress oms-number]}]
-  (let [page-users (:current-page @state/*patients)
-        selected-patient (first (filter #(= id (:id %)) page-users))
-        selected-index (.indexOf page-users selected-patient)]
+  (let [selected-index (.indexOf (:current-page @state/*patients) @state/*activ-patient)]
     (swap! state/*patients
            assoc-in
            [:current-page selected-index]
@@ -51,9 +49,9 @@
 
 (defn delete-patient
   []
-  (swap! state/*patients update-in [:content] dissoc (:id @state/*activ-id))
+  (swap! state/*patients update-in [:content] dissoc (:id @state/*activ-patient))
   (swap! state/*patients update :patient-number dec) ;;TODO patient-number no more
-  (reset! state/*activ-id nil)
+  (reset! state/*activ-patient nil)
   (toggle-delete-window false))
 
 
@@ -70,12 +68,12 @@
       {:on-click #(toggle-patient-window {:active true
                                           :patient initial-values})}
       "Create"]
-     [:button.menu-btn (when @state/*activ-id
+     [:button.menu-btn (when @state/*activ-patient
                          {:class "active"
                           :on-click #(toggle-patient-window {:active true
-                                                             :patient @state/*activ-id})})
+                                                             :patient @state/*activ-patient})})
       "Edit"]
-     [:button.menu-btn (when @state/*activ-id
+     [:button.menu-btn (when @state/*activ-patient
                          {:class "active"
                           :on-click #(toggle-delete-window true)})
       "Delete"]]

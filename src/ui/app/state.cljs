@@ -2,7 +2,7 @@
   (:require [reagent.core :as r]))
 
 
-(def *activ-id (r/atom nil))
+(def *activ-patient (r/atom nil))
 
 (def *page (r/atom 1))
 

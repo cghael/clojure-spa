@@ -1,7 +1,8 @@
 (ns ui.app.api
   (:require [ajax.core :refer [GET POST PUT]]
             [ajax.edn :refer [edn-response-format edn-read]]
-            [ui.app.state :as state]))
+            [ui.app.state :as state]
+            [clojure.string :as string]))
 
 
 (def server-uri "http://localhost:4000") ;;todo add to config
@@ -60,12 +61,32 @@
 
 (defn patient-edit-handler
   [response]
-  (.log js/console response)
-  (.log js/console (:patient response))
-  (.log js/console @state/*activ-id)
-  (.log js/console (@state/*activ-id @state/*patients))
-  (when (not= (:patient response) (:id @state/*activ-id))
-    (.log js/console "ERROR")))
+  ;todo add message about success/unsuccess
+  (let [patient (:patient response)]
+    (if (= (:id patient) (:id @state/*activ-patient))
+      (reset! state/*activ-patient patient)
+      (do
+        (.log js/console "ERROR db edit patient")
+        (let [{:keys [id
+                      name
+                      s-name
+                      sex
+                      birth
+                      adress
+                      oms-number]} @state/*activ-patient
+              page-users (:current-page @state/*patients)
+              selected-patient (first (filter #(= id (:id %)) page-users))
+              selected-index (.indexOf page-users selected-patient)]
+          (swap! state/*patients
+                 assoc-in
+                 [:current-page selected-index]
+                 {:id id
+                  :name (string/trim name)
+                  :s-name (string/trim s-name)
+                  :sex (string/trim sex)
+                  :birth birth
+                  :adress (string/trim adress)
+                  :oms-number (string/trim oms-number)}))))))
 
 
 (defn patient-edit-error-handler
