@@ -16,7 +16,7 @@
     (fn []
       [:div.patients
        (let [display-patients (:current-page @state/*patients)]
-         (doall (for [{:keys [id name s-name sex birth adress oms-number] :as patient} (vals display-patients)]
+         (doall (for [{:keys [id name s-name sex birth adress oms-number] :as patient} display-patients]
                   [:div.patient {:key id}
                    [:div.patient-main (if (= id (:id @state/*activ-id))
                                         {:class "active" :on-click #(toggle-activ patient)}

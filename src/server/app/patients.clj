@@ -112,4 +112,60 @@
                              :sex "male"
                              :birth "18-05-1992"
                              :adress "Georgia, Batumi, G. Tseritelli, 63"
+                             :oms-number "0987654321"}
+                      :p-17 {:id :p-17
+                             :name "Andrey"
+                             :s-name "Pospelov"
+                             :sex "male"
+                             :birth "21-03-1989"
+                             :adress "Georgia, Batumi, G. Tseritelli, 63"
+                             :oms-number "1234567890"}
+                      :p-18 {:id :p-18
+                             :name "Andrey"
+                             :s-name "Bragnikov"
+                             :sex "male"
+                             :birth "03-03-1989"
+                             :adress "Georgia, Kapuleti, Maraishvili, 128"
+                             :oms-number "1209348756"}
+                      :p-19 {:id :p-19
+                             :name "Vladislav"
+                             :s-name "Dudashvili"
+                             :sex "male"
+                             :birth "18-05-1992"
+                             :adress "Georgia, Batumi, G. Tseritelli, 63"
+                             :oms-number "0987654321"}
+                      :p-20 {:id :p-20
+                             :name "Anton"
+                             :s-name "Gorobets"
+                             :sex "male"
+                             :birth "20-11-1986"
+                             :adress "Georgia, Batumi, G. Tseritelli, 63"
+                             :oms-number "1111222233"}
+                      :p-21 {:id :p-21
+                             :name "Alex"
+                             :s-name "Kruglyak"
+                             :sex "male"
+                             :birth "27-03-1988"
+                             :adress "Georgia, Batumi, Mayakovskaya, 112"
+                             :oms-number "99988877"}
+                      :p-22 {:id :p-22
+                             :name "Andrey"
+                             :s-name "Pospelov"
+                             :sex "male"
+                             :birth "21-03-1989"
+                             :adress "Georgia, Batumi, G. Tseritelli, 63"
+                             :oms-number "1234567890"}
+                      :p-23 {:id :p-23
+                             :name "Andrey"
+                             :s-name "Bragnikov"
+                             :sex "male"
+                             :birth "03-03-1989"
+                             :adress "Georgia, Kapuleti, Maraishvili, 128"
+                             :oms-number "1209348756"}
+                      :p-24 {:id :p-24
+                             :name "Vladislav"
+                             :s-name "Dudashvili"
+                             :sex "male"
+                             :birth "18-05-1992"
+                             :adress "Georgia, Batumi, G. Tseritelli, 63"
                              :oms-number "0987654321"}}))

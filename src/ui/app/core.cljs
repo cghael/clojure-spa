@@ -15,7 +15,7 @@
 (defn ^:export main
   "Run application startup logic."
   []
-  (api/patient-list)
+  (api/patient-list :first)
   (r/render 
    [app] 
    (.getElementById js/document "app")))

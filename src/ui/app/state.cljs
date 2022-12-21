@@ -6,5 +6,6 @@
 
 (def *page (r/atom 1))
 
-(def *patients (r/atom {:current-page {}
-                        :next-page {}}))
+(def *patients (r/atom {:current-page []
+                        :next-page []
+                        :previous-page []}))

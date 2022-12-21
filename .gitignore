@@ -10,4 +10,6 @@ report.html
 .calva/output-window
 resources/public/js
 target
-.calva
+.calva/
+.calva/output-window/output.calva-repl
+.lsp/.cache/db.transit.json
