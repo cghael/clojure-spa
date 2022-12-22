@@ -3,6 +3,7 @@
             [reagent.core :as r]
             [ui.app.components.delete-modal :refer [delete-modal]]
             [ui.app.components.patient-editor :refer [patient-editor]]
+            [ui.app.components.alert :refer [alert]]
             [clojure.string :as string]
             [ui.app.api :as api]))
 
@@ -77,6 +78,7 @@
                          {:class "active"
                           :on-click #(toggle-delete-window true)})
       "Delete"]]
+    ;; [alert]
     [patient-editor {:status "Patient's card"
                      :*patient-window *patient-window
                      :*patient-values *patient-values

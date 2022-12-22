@@ -9,3 +9,5 @@
 (def *patients (r/atom {:current-page []
                         :next-page []
                         :previous-page []}))
+
+(def *alert (r/atom nil))

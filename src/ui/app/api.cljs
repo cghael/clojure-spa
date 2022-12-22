@@ -64,7 +64,10 @@
   ;todo add message about success/unsuccess
   (let [patient (:patient response)]
     (if (= (:id patient) (:id @state/*activ-patient))
-      (reset! state/*activ-patient patient)
+      (do
+        (reset! state/*activ-patient patient)
+        (reset! state/*alert :success) 
+        (js/setTimeout #(reset! state/*alert nil) 3000))
       (do
         (.log js/console "ERROR db edit patient")
         (let [{:keys [id
@@ -86,7 +89,9 @@
                   :sex (string/trim sex)
                   :birth birth
                   :adress (string/trim adress)
-                  :oms-number (string/trim oms-number)}))))))
+                  :oms-number (string/trim oms-number)})
+          (reset! state/*alert :error)
+          (js/setTimeout #(reset! state/*alert nil) 3000))))))
 
 
 (defn patient-edit-error-handler
