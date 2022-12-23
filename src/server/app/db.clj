@@ -8,14 +8,12 @@
 (defn patient-list
   [limit page get-pages search-map]
   (if search-map
-    (let [search-keys (vec (keys search-map))
-        _ (pprint search-keys)
-        filtered-list (filter (fn [m]
-                                (every? true? 
-                                        (map #(= (% search-map) (% m)) 
-                                             search-keys))) (vals @*patients))
-        _ (pprint filtered-list)]
-    (r/as-success {:data (into [] (take (* limit get-pages) (drop (* limit (dec page)) filtered-list)))}))
+    (let [search-keys (keys search-map)
+          filtered-list (filter (fn [m]
+                                  (every? true?
+                                          (map #(= (% search-map) (% m))
+                                               search-keys))) (vals @*patients))]
+      (r/as-success {:data (into [] (take (* limit get-pages) (drop (* limit (dec page)) filtered-list)))}))
     (r/as-success {:data (into [] (take (* limit get-pages) (drop (* limit (dec page)) (vals @*patients))))})))
 
 
@@ -28,9 +26,7 @@
 
 (defn patient-delete
   [id]
-  (pprint (count @*patients))
   (swap! *patients dissoc id)
-  (pprint (count @*patients))
   (r/as-deleted {:id id}))
 
 
@@ -44,7 +40,7 @@
                 Integer.
                 inc
                 (str "p-")
-                keyword) 
+                keyword)
         params (assoc params :id id)]
     (swap! *patients assoc id params)
     (r/as-created {:patient params})))

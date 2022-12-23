@@ -38,7 +38,7 @@ time, mark, audio, video {
   top: 0;
   left: 0;
   overflow-x: hidden;
-  width: 100px;
+  width: 110px;
 }
 
 .menu-flex {
@@ -59,12 +59,13 @@ time, mark, audio, video {
   background: none;
   border: none;
   color: #ebf7fd82;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   height: 50px;
   padding: .45rem .6rem;
   transition: all .2s ease;
   width: 100%;
   text-align: left;
+  transition: all .2s linear;
 }
 
 .menu-btn.active {
@@ -72,13 +73,17 @@ time, mark, audio, video {
   cursor: pointer;
 }
 
+.menu-btn.hidden {
+  display: none;
+}
+
 .menu-btn.active:hover {
   color: #f6fcfe;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .content {
-  margin-left: 100px;
+  margin-left: 110px;
   width: 100%;
   position: relative;
 }

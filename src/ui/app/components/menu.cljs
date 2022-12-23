@@ -2,7 +2,7 @@
   (:require [ui.app.state :as state]
             [reagent.core :as r]
             [ui.app.components.delete-modal :refer [delete-modal]]
-            [ui.app.components.patient-editor :refer [patient-editor]] 
+            [ui.app.components.patient-editor :refer [patient-editor]]
             [clojure.string :as string]
             [ui.app.api :as api]))
 
@@ -52,10 +52,10 @@
                           :action nil}))
 
 (defn search-patient
-  [search-data] 
+  [search-data]
   (reset! state/*patients {:current-page []
                            :next-page []
-                           :previous-page []}) 
+                           :previous-page []})
   (reset! state/*activ-patient nil)
   (reset! state/*page 1)
   (reset! state/*search-filer (dissoc search-data :id))
@@ -69,7 +69,7 @@
   (reset! *patient-delete-modal value))
 
 (defn delete-patient
-  [] 
+  []
   (api/patient-delete)
   (reset! state/*activ-patient nil)
   (toggle-delete-window false))
@@ -80,11 +80,19 @@
   [:div.menu
    [:div.menu-flex
     [:div.menu-buttons
-     [:button.menu-btn.active ;;TODO logic
+     [:button.menu-btn.active
       {:on-click #(toggle-patient-window {:window-type :search
                                           :patient initial-values
                                           :action search-patient})}
       "Search"]
+     [:button.menu-btn
+      (when @state/*search-filer
+        {:class "active"
+         :on-click #(do (reset! state/*search-filer nil)
+                        (reset! state/*activ-patient nil)
+                        (reset! state/*page 1)
+                        (api/patient-list :first))})
+      "Drop filter"]
      [:button.menu-btn.active
       {:on-click #(toggle-patient-window {:window-type :create
                                           :patient initial-values
@@ -99,7 +107,7 @@
      [:button.menu-btn (when @state/*activ-patient
                          {:class "active"
                           :on-click #(toggle-delete-window true)})
-      "Delete"]] 
+      "Delete"]]
     [patient-editor {:*patient-window *patient-window
                      :*patient-values *patient-values
                      :initial-values initial-values
