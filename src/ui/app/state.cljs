@@ -10,4 +10,6 @@
                         :next-page []
                         :previous-page []}))
 
+(def *search-filer (r/atom nil))
+
 (def *alert (r/atom nil))

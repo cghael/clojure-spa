@@ -2,15 +2,14 @@
   (:require [ui.app.state :as state]
             [reagent.core :as r]
             [ui.app.components.delete-modal :refer [delete-modal]]
-            [ui.app.components.patient-editor :refer [patient-editor]]
-            [ui.app.components.alert :refer [alert]]
+            [ui.app.components.patient-editor :refer [patient-editor]] 
             [clojure.string :as string]
             [ui.app.api :as api]))
 
 
-(def *patient-window (r/atom false))
+(def *patient-window (r/atom nil))
 
-(def *patient-delete (r/atom false))
+(def *patient-delete-modal (r/atom false))
 
 (def initial-values {:id nil
                      :name ""
@@ -22,36 +21,56 @@
 
 (def *patient-values (r/atom initial-values))
 
+(def *card-action (r/atom nil))
+
 (defn toggle-patient-window
-  [{:keys [active patient]}]
-  (reset! *patient-window active)
-  (reset! *patient-values patient))
+  [{:keys [window-type patient action]}]
+  (reset! *patient-window window-type)
+  (reset! *patient-values patient)
+  (reset! *card-action action))
 
 (defn save-patient
   [{:keys [id name s-name sex birth adress oms-number]}]
-  (let [selected-index (.indexOf (:current-page @state/*patients) @state/*activ-patient)]
-    (swap! state/*patients
-           assoc-in
-           [:current-page selected-index]
-           {:id id
-            :name (string/trim name)
-            :s-name (string/trim s-name)
-            :sex (string/trim sex)
-            :birth birth
-            :adress (string/trim adress)
-            :oms-number (string/trim oms-number)})
-    (api/patient-edit @*patient-values)
-    (toggle-patient-window {:active false
-                            :patient initial-values})))
+  (if (nil? id)
+      ;; Create patient
+    (api/patient-create @*patient-values)
+      ;; Edit patient
+    (let [selected-index (.indexOf (:current-page @state/*patients) @state/*activ-patient)]
+      (swap! state/*patients
+             assoc-in
+             [:current-page selected-index]
+             {:id id
+              :name (string/trim name)
+              :s-name (string/trim s-name)
+              :sex (string/trim sex)
+              :birth birth
+              :adress (string/trim adress)
+              :oms-number (string/trim oms-number)})
+      (api/patient-edit @*patient-values)))
+  (toggle-patient-window {:window-type nil
+                          :patient initial-values
+                          :action nil}))
+
+(defn search-patient
+  [search-data] 
+  (reset! state/*patients {:current-page []
+                           :next-page []
+                           :previous-page []}) 
+  (reset! state/*activ-patient nil)
+  (reset! state/*page 1)
+  (reset! state/*search-filer (dissoc search-data :id))
+  (api/patient-list :first)
+  (toggle-patient-window {:window-type nil
+                          :patient initial-values
+                          :action nil}))
 
 (defn toggle-delete-window
   [value]
-  (reset! *patient-delete value))
+  (reset! *patient-delete-modal value))
 
 (defn delete-patient
-  []
-  (swap! state/*patients update-in [:content] dissoc (:id @state/*activ-patient))
-  (swap! state/*patients update :patient-number dec) ;;TODO patient-number no more
+  [] 
+  (api/patient-delete)
   (reset! state/*activ-patient nil)
   (toggle-delete-window false))
 
@@ -62,30 +81,31 @@
    [:div.menu-flex
     [:div.menu-buttons
      [:button.menu-btn.active ;;TODO logic
-      {:on-click #(toggle-patient-window {:active true
-                                          :patient initial-values})}
+      {:on-click #(toggle-patient-window {:window-type :search
+                                          :patient initial-values
+                                          :action search-patient})}
       "Search"]
      [:button.menu-btn.active
-      {:on-click #(toggle-patient-window {:active true
-                                          :patient initial-values})}
+      {:on-click #(toggle-patient-window {:window-type :create
+                                          :patient initial-values
+                                          :action save-patient})}
       "Create"]
      [:button.menu-btn (when @state/*activ-patient
                          {:class "active"
-                          :on-click #(toggle-patient-window {:active true
-                                                             :patient @state/*activ-patient})})
+                          :on-click #(toggle-patient-window {:window-type :edit
+                                                             :patient @state/*activ-patient
+                                                             :action save-patient})})
       "Edit"]
      [:button.menu-btn (when @state/*activ-patient
                          {:class "active"
                           :on-click #(toggle-delete-window true)})
-      "Delete"]]
-    ;; [alert]
-    [patient-editor {:status "Patient's card"
-                     :*patient-window *patient-window
+      "Delete"]] 
+    [patient-editor {:*patient-window *patient-window
                      :*patient-values *patient-values
                      :initial-values initial-values
                      :toggle-patient-window toggle-patient-window
-                     :save-patient save-patient}]
-    [delete-modal {:*patient-delete *patient-delete
+                     :action @*card-action}]
+    [delete-modal {:*patient-delete-modal *patient-delete-modal
                    :toggle-delete-window toggle-delete-window
                    :delete-patient delete-patient}]
     [:div.menu-logo

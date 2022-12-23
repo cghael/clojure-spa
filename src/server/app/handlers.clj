@@ -21,6 +21,24 @@
   (let [res-data (api/patient-edit request)]
     (r/as-http res-data (:headers {"content-type" "application/edn"}))))
 
+
+(defn patient-delete-handler
+  [request]
+  (log/info {:msg "Request patient-delete"
+             :params request})
+  ;; todo add spec
+(let [res-data (api/patient-delete request)]
+  (r/as-http res-data (:headers {"content-type" "application/edn"}))))
+
+
+(defn patient-create-handler
+  [request]
+  (log/info {:msg "Request patient-create"
+             :params request})
+  ;; todo add spec
+(let [res-data (api/patient-create request)]
+  (r/as-http res-data (:headers {"content-type" "application/edn"}))))
+
 ;; (defn problem-by-id
 ;;   [request]
 ;;   (let [id (:id (:params request))]

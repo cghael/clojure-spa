@@ -10,7 +10,7 @@
 (def app (-> routes/app 
              (middleware/wrap-format)
              (wrap-defaults (-> site-defaults
-                                #_(assoc-in [:params :keywordize] true)
+                                (assoc-in [:params :keywordize] true)
                                 (assoc-in [:security :anti-forgery] false)))
              (wrap-cors :access-control-allow-origin [#"http://localhost:3000"]
                         :access-control-allow-methods [:get :put :post :delete])))
