@@ -24,3 +24,9 @@
 (comment
   (shadow.cljs.devtools.api/nrepl-select :app)
   )
+
+;; TODO:
+;; config параметры считывать а не хардкод
+;; mount сделать для компонентов
+;; database подключить
+;; tests написать тесты для сервака

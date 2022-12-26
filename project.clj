@@ -13,7 +13,8 @@
                  [ninja.anywhere/unifier "1.0.0"]
                  [com.taoensso/timbre "5.2.1"]
                  [metosin/ring-http-response "0.9.3"]
-                 [metosin/muuntaja "0.6.8"]]
+                 [metosin/muuntaja "0.6.8"]
+                 [org.clojure/spec.alpha "0.3.218"]]
 
   :main ^:skip-aot server.app.core
 
