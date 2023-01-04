@@ -2,7 +2,25 @@
   (:require [server.app.patients :refer [*patients]]
             [ninja.unifier.response :as r]
             [taoensso.timbre :as log]
-            [clojure.pprint :refer [pprint]]))
+            [clojure.pprint :refer [pprint]]
+            [db.core :refer [db]]
+            [clojure.java.jdbc :as jdbc]
+            [clojure.string :as string]
+            [clojure.walk :as walk]))
+
+
+(defn transform-data
+  [m]
+  (walk/postwalk (fn [x]
+                   (cond
+                     (instance? java.util.Date x)
+                     (.format (java.text.SimpleDateFormat. "yyyy-MM-dd") x)
+                     
+                     (keyword? x)
+                     (keyword (string/replace (name x) #"_" "-"))
+                     
+                     :else x))
+                 m))
 
 
 (defn patient-list
@@ -14,7 +32,11 @@
                                           (map #(= (% search-map) (% m))
                                                search-keys))) (vals @*patients))]
       (r/as-success {:data (into [] (take (* limit get-pages) (drop (* limit (dec page)) filtered-list)))}))
-    (r/as-success {:data (into [] (take (* limit get-pages) (drop (* limit (dec page)) (vals @*patients))))})))
+    (let [res (jdbc/query db ["select * from spa.patients limit ? offset ?" (* limit get-pages) (* (dec page) limit)])
+          res (map #(transform-data %) res)
+          _ (pprint res)]
+      (r/as-success {:data res})
+      #_(r/as-success {:data (into [] (take (* limit get-pages) (drop (* limit (dec page)) (vals @*patients))))}))))
 
 
 (defn patient-edit

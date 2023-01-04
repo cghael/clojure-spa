@@ -4,7 +4,7 @@
 
 (defn delete-modal
   [{:keys [*patient-delete-modal toggle-delete-window delete-patient]}]
-  (let [patient (str (:name @state/*activ-patient) " " (:s-name @state/*activ-patient))]
+  (let [patient (str (:name @state/*activ-patient) " " (:last-name @state/*activ-patient))]
     [:div.patient-window__underlay (when @*patient-delete-modal {:class "active"})
      [:div.patient-delete
       [:div.patient-delete__body

@@ -20,12 +20,12 @@
   (s/and ::ne-string #(re-matches #"\d+" %)))
 
 (s/def ::patient-data
-  (s/keys :req-un [::id ::name ::s-name ::sex ::birth ::adress ::oms-number]
+  (s/keys :req-un [::id ::name ::last-name ::sex ::birth-date ::adress ::oms-number]
           ::id #(seq %)
           ::name string?
-          ::s-name string?
+          ::last-name string?
           ::sex string?
-          ::birth string?
+          ::birth-date string?
           ::adress string?
           ::oms-number string?))
 
@@ -42,11 +42,11 @@
           ::key ::ne-string-of-digits
           ::search-data (s/or
                          #(= % "null")
-                         (s/keys :req-un [::name ::s-name ::sex ::birth ::adress ::oms-number]
+                         (s/keys :req-un [::name ::last-name ::sex ::birth-date ::adress ::oms-number]
                                  ::name string?
-                                 ::s-name string?
+                                 ::last-name string?
                                  ::sex string?
-                                 ::birth string?
+                                 ::birth-date string?
                                  ::adress string?
                                  ::oms-number string?))))
 

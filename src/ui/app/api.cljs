@@ -90,9 +90,9 @@
   (.log js/console (str "No patients found: " status " " status-text))
   (let [{:keys [id
                 name
-                s-name
+                last-name
                 sex
-                birth
+                birth-date
                 adress
                 oms-number]} @state/*activ-patient
         page-users (:current-page @state/*patients)
@@ -103,9 +103,9 @@
            [:current-page selected-index]
            {:id id
             :name (string/trim name)
-            :s-name (string/trim s-name)
+            :last-name (string/trim last-name)
             :sex (string/trim sex)
-            :birth birth
+            :birth-date birth-date
             :adress (string/trim adress)
             :oms-number (string/trim oms-number)})
     (alert-pop-up :error)))

@@ -13,9 +13,9 @@
 
 (def initial-values {:id nil
                      :name ""
-                     :s-name ""
+                     :last-name ""
                      :sex ""
-                     :birth ""
+                     :birth-date ""
                      :adress ""
                      :oms-number ""})
 
@@ -30,7 +30,7 @@
   (reset! *card-action action))
 
 (defn save-patient
-  [{:keys [id name s-name sex birth adress oms-number]}]
+  [{:keys [id name last-name sex birth-date adress oms-number]}]
   (if (nil? id)
       ;; Create patient
     (api/patient-create @*patient-values)
@@ -41,9 +41,9 @@
              [:current-page selected-index]
              {:id id
               :name (string/trim name)
-              :s-name (string/trim s-name)
+              :last-name (string/trim last-name)
               :sex (string/trim sex)
-              :birth birth
+              :birth-date birth-date
               :adress (string/trim adress)
               :oms-number (string/trim oms-number)})
       (api/patient-edit @*patient-values)))

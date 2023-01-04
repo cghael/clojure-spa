@@ -4,7 +4,10 @@
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.middleware.cors :refer [wrap-cors]]
             [server.app.routes :as routes]
-            [muuntaja.middleware :as middleware]))
+            [muuntaja.middleware :as middleware]
+            [mount.core :as mount :refer [defstate]]
+            [config :refer [config]]
+            [taoensso.timbre :as log]))
 
 
 (def app (-> routes/app 
@@ -16,17 +19,12 @@
                         :access-control-allow-methods [:get :put :post :delete])))
 
 
-(defn server
-  [port host]
-  (jetty/run-jetty app {:host  host
-                        :port  port
-                        :join? false}))
+(defstate server
+  :start
+  (let [server-config (:server config)]
+    (log/info "Running server with config" server-config)
+    (jetty/run-jetty app server-config))
 
-
-(defn -main
-  "Start point"
-  [& args]
-  (let [port (Integer/parseInt (or (System/getenv "PORT") "4000"))
-        host (or (System/getenv "HOST") "127.0.0.1")]
-    (server port host)
-    (println (format "> Running server at %s port %d" host port))))
+  :stop
+  (do (log/info "Stop server.")
+      (.stop server)))

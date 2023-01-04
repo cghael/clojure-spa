@@ -7,9 +7,9 @@
                 :search "Search patients"})
 
 (def label_name {"name" "First name"
-                 "s-name" "Second name"
+                 "last-name" "Last name"
                  "sex" "Sex"
-                 "birth" "Birth date"
+                 "birth-date" "Birth date"
                  "adress" "Adress"
                  "oms-number" "OMS number"})
 
@@ -27,7 +27,7 @@
 
 (defn patient-editor
   [{:keys [*patient-window *patient-values initial-values toggle-patient-window action]}]
-  (let [{:keys [name s-name sex birth adress oms-number]} @*patient-values]
+  (let [{:keys [name last-name sex birth-date adress oms-number]} @*patient-values]
     [:div.patient-window__underlay (when @*patient-window {:class "active"})
      [:div.patient-window
       [:div.patient-window__body
@@ -36,17 +36,17 @@
                      :type "text"
                      :value name
                      :*patient-values *patient-values}]
-       [form-return {:id "s-name"
+       [form-return {:id "last-name"
                      :type "text"
-                     :value s-name
+                     :value last-name
                      :*patient-values *patient-values}]
        [form-return {:id "sex"
                      :type "text"
                      :value sex
                      :*patient-values *patient-values}]
-       [form-return {:id "birth"
+       [form-return {:id "birth-date"
                      :type "date"
-                     :value birth
+                     :value birth-date
                      :*patient-values *patient-values}]
        [form-return {:id "adress"
                      :type "text"

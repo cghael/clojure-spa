@@ -1,0 +1,74 @@
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000001';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000002';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000003';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000004';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000005';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000006';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000007';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000008';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000009';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000010';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000011';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000012';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000013';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000014';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000015';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000016';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000017';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000018';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000019';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000020';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000021';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000022';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000023';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000024';
+--;;
+
+DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000025';
+--;;

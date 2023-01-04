@@ -14,9 +14,18 @@
                  [com.taoensso/timbre "5.2.1"]
                  [metosin/ring-http-response "0.9.3"]
                  [metosin/muuntaja "0.6.8"]
-                 [org.clojure/spec.alpha "0.3.218"]]
+                 [org.clojure/spec.alpha "0.3.218"]
+                 [mount "0.1.16"]
+                 [org.clojure/java.jdbc "0.7.12"]
+                 [org.postgresql/postgresql "42.2.22"]
+                 [healthunlocked/lein-docker-compose "0.2.1"]
+                 [migratus "1.4.6"]
+                 [hikari-cp "3.0.1"]
+                 [com.fzakaria/slf4j-timbre "0.3.21"]]
+  
+  :plugins [[healthunlocked/lein-docker-compose "0.2.1"]]
 
-  :main ^:skip-aot server.app.core
+  :main ^:skip-aot core
 
   :target-path "target/%s"
 
