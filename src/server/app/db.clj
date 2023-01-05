@@ -1,8 +1,6 @@
 (ns server.app.db
-  (:require [server.app.patients :refer [*patients]]
-            [ninja.unifier.response :as r]
-            [taoensso.timbre :as log]
-            [clojure.pprint :refer [pprint]]
+  (:require [ninja.unifier.response :as r]
+            [taoensso.timbre :as log] 
             [db.core :refer [db]]
             [clojure.java.jdbc :as jdbc]
             [clojure.string :as string]
