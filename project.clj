@@ -21,7 +21,8 @@
                  [healthunlocked/lein-docker-compose "0.2.1"]
                  [migratus "1.4.6"]
                  [hikari-cp "3.0.1"]
-                 [com.fzakaria/slf4j-timbre "0.3.21"]]
+                 [com.fzakaria/slf4j-timbre "0.3.21"]
+                 [clj-time "0.14.0"]]
   
   :plugins [[healthunlocked/lein-docker-compose "0.2.1"]]
 

@@ -8,7 +8,7 @@
 
 (defn patient-list
   [{{:keys [limit page get-pages key search-data]} :params :as request}]
-  (let [limit' (Integer. limit) ;; todo move coersion to handler level
+  (let [limit' (Integer. limit)
         page' (Integer. page)
         get-pages' (Integer. get-pages)
         serch-map (if (not= "null" search-data)
@@ -23,7 +23,7 @@
       (do
         (log/error "db/patient-list error" {:res-data res-data 
                                             :req-params (:params request)})
-        (r/as-error (assoc res-data :error "DB error")))
+        (r/as-error res-data))
       (do
         (log/info "db/patient-list success." res-data)
         (r/as-success res-data)))))
