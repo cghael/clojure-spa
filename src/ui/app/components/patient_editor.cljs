@@ -1,5 +1,4 @@
-(ns ui.app.components.patient-editor
-  (:require [ui.app.state :as state]))
+(ns ui.app.components.patient-editor)
 
 
 (def card-name {:create "Create new patient"

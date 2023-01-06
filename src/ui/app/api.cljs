@@ -60,18 +60,29 @@
                        :page dec}})
 
 
+(defn- delete-empty-values
+  [m]
+  (when m
+    (reduce-kv (fn [acc k v]
+                 (if (empty? v)
+                   acc
+                   (assoc acc k v)))
+               {} m)))
+
+
 (defn patient-list
   [page-key]
   (let [page-props (page-key what-page)
-        limit (:limit page-props)
-        page ((:page page-props) @state/*page)
-        get-pages (:get-pages page-props)]
+        params {:limit (:limit page-props)
+                :page ((:page page-props) @state/*page)
+                :get-pages (:get-pages page-props)
+                :key page-key}
+        _ (swap! state/*search-filer delete-empty-values)
+        params (if @state/*search-filer
+                 (assoc params :search-data @state/*search-filer)
+                 params)]
     (GET (str server-uri "/patient-list")
-      {:params {:limit limit
-                :page page
-                :get-pages get-pages
-                :key page-key
-                :search-data @state/*search-filer}
+      {:params params
        :handler patient-list-handler
        :error-handler patient-list-error-handler})))
 

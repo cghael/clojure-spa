@@ -1,7 +1,6 @@
 (ns server.app.api
   (:require [server.app.db :as db]
             [ninja.unifier.response :as r]
-            [server.app.patients :refer [*patients]]
             [taoensso.timbre :as log]
             [clojure.pprint :refer [pprint]]))
 
@@ -11,13 +10,12 @@
   (let [limit' (Integer. limit)
         page' (Integer. page)
         get-pages' (Integer. get-pages)
-        serch-map (if (not= "null" search-data)
+        search-map (when search-data
                     (reduce (fn [acc [k v]]
                               (if (empty? v)
                                 acc
-                                (assoc acc k v))) {} search-data)
-                    nil)
-        res-data (db/patient-list limit' page' get-pages' serch-map)
+                                (assoc acc k v))) {} search-data))
+        res-data (db/patient-list limit' page' get-pages' search-map)
         res-data (assoc res-data :key key)]
     (if (r/-error? res-data)
       (do
@@ -59,8 +57,7 @@
 
 (defn patient-create
   [request]
-  (let [_ (pprint (count @*patients))
-        params (:body-params request)
+  (let [params (:body-params request)
         res-data (db/patient-create params)]
     (if (r/-error? res-data)
       (do

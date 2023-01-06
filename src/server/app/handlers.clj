@@ -7,52 +7,49 @@
 
 
 ;;
-;; Common spec
+;; Spec
 ;;
 
-(s/def ::positive-int
-  #(pos-int? %))
 
 (s/def ::ne-string
   (every-pred string? not-empty))
 
-(s/def ::ne-string-of-digits
-  (s/and ::ne-string #(re-matches #"\d+" %)))
+(s/def ::pos-number-string
+  (s/and ::ne-string #(re-matches #"^[1-9]\d*" %)))
+
+(s/def ::limit ::pos-number-string)
+(s/def ::page ::pos-number-string)
+(s/def ::get-pages ::pos-number-string)
+(s/def ::key #(contains? #{"first" "back" "next" "all"} %))
+(s/def ::id uuid?)
+(s/def ::name ::ne-string)
+(s/def ::last-name ::ne-string)
+(s/def ::sex #(contains? #{"male" "female" "other"} %))
+(s/def ::birth-date
+  (s/and ::ne-string #(re-matches #"^\d{4}-\d{2}-\d{2}" %)))
+(s/def ::adress ::ne-string)
+(s/def ::oms-number
+  (s/and ::ne-string #(re-matches #"^\d{4}\s\d{6}" %)))
 
 (s/def ::patient-data
-  (s/keys :req-un [::id ::name ::last-name ::sex ::birth-date ::adress ::oms-number]
-          ::id #(seq %)
-          ::name string?
-          ::last-name string?
-          ::sex string?
-          ::birth-date string?
-          ::adress string?
-          ::oms-number string?))
+  (s/keys :req-un [::id ::name ::last-name ::sex ::birth-date ::adress ::oms-number]))
+
+(s/def ::search-data
+  (s/and map? not-empty
+         (s/keys :opt-un [::name ::last-name ::sex ::birth-date ::adress ::oms-number])))
+
+(s/def ::params
+  (s/keys :req-un [::limit ::page ::get-pages ::key]
+          :opt-un [::search-data]))
+
+(s/def ::patient-list-request 
+  (s/keys :req-un [::params]))
 
 
 ;;
 ;; patient-list
 ;;
 
-(s/def ::patient-list-request-params
-  (s/keys :req-un [::limit ::page ::get-pages ::key ::search-data]
-          ::limit ::ne-string-of-digits
-          ::page ::ne-string-of-digits
-          ::get-pages ::ne-string-of-digits
-          ::key ::ne-string-of-digits
-          ::search-data (s/or
-                         #(= % "null")
-                         (s/keys :req-un [::name ::last-name ::sex ::birth-date ::adress ::oms-number]
-                                 ::name string?
-                                 ::last-name string?
-                                 ::sex string?
-                                 ::birth-date string?
-                                 ::adress string?
-                                 ::oms-number string?))))
-
-(s/def ::patient-list-request 
-  (s/keys :req-un [::params] 
-          ::params ::patient-list-request-params))
 
 (defn patient-list-handler
   [request]
