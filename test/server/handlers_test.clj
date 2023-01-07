@@ -144,5 +144,4 @@
         (is (false? (s/valid? ::sut/patient-edit-create-request req))))
       
       (let [req (assoc-in req [:body-params :id] nil)]
-        (is (false? (s/valid? ::sut/patient-edit-create-request req))))
-      )))
+        (is (false? (s/valid? ::sut/patient-edit-create-request req)))))))

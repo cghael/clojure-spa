@@ -52,6 +52,8 @@
 (s/def ::patient-edit-create-request
   (s/keys :req-un [::body-params]))
 
+(s/valid? ::patient-edit-create-request {:body-params {:id #uuid "2700cb34-04bc-448a-8a48-000000000015", :name "Jesus", :last-name "Christ", :sex "male", :birth-date "0001-01-07", :adress "Israel, Nazareth, 7", :oms-number "3333 333333"}})
+
 (s/def ::patient-delete-request
   (s/keys :req-un [::body-params]))
 
@@ -80,7 +82,7 @@
   [request]
   (log/info {:msg "Request patient-edit"
              :params request}) 
-  (if (s/valid? ::patient-edit-request request)
+  (if (s/valid? ::patient-edit-create-request request)
     (let [res-data (api/patient-edit request)] 
       (r/as-http res-data (:headers {"content-type" "application/edn"})))
     (r/as-http (r/as-incorrect (s/explain-data ::patient-edit-create-request request)))))
@@ -110,7 +112,7 @@
   [request]
   (log/info {:msg "Request patient-create"
              :params request}) 
-(if (s/valid? ::patient-create-request request)
+(if (s/valid? ::patient-edit-create-request request)
   (let [res-data (api/patient-create request)] 
     (r/as-http res-data (:headers {"content-type" "application/edn"})))
   (r/as-http (r/as-incorrect (s/explain-data ::patient-edit-create-request request)))))
