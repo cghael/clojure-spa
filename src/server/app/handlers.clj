@@ -20,11 +20,11 @@
 (s/def ::limit ::pos-number-string)
 (s/def ::page ::pos-number-string)
 (s/def ::get-pages ::pos-number-string)
-(s/def ::key #(contains? #{"first" "back" "next" "all"} %))
+(s/def ::key #{"first" "back" "next" "all"})
 (s/def ::id uuid?)
 (s/def ::name ::ne-string)
 (s/def ::last-name ::ne-string)
-(s/def ::sex #(contains? #{"male" "female" "other"} %))
+(s/def ::sex #{"male" "female" "other"})
 (s/def ::birth-date
   (s/and ::ne-string #(re-matches #"^\d{4}-\d{2}-\d{2}" %)))
 (s/def ::adress ::ne-string)
@@ -36,14 +36,24 @@
 
 (s/def ::search-data
   (s/and map? not-empty
-         (s/keys :opt-un [::name ::last-name ::sex ::birth-date ::adress ::oms-number])))
+         (s/keys :opt-un [::name ::last-name ::sex ::birth-date ::adress ::oms-number]))) 
 
 (s/def ::params
-  (s/keys :req-un [::limit ::page ::get-pages ::key]
-          :opt-un [::search-data]))
+  (s/keys :req-un [::page ::get-pages ::key]
+          :opt-un [::limit ::search-data]))
 
 (s/def ::patient-list-request 
   (s/keys :req-un [::params]))
+
+(s/def ::body-params 
+  (s/or :delete (s/keys :req-un [::id]) 
+        :edit-create ::patient-data))
+
+(s/def ::patient-edit-create-request
+  (s/keys :req-un [::body-params]))
+
+(s/def ::patient-delete-request
+  (s/keys :req-un [::body-params]))
 
 
 ;;
@@ -65,9 +75,6 @@
 ;; patient-edit
 ;;
 
-(s/def ::patient-edit-request
-  (s/keys :req-un [::body-params]
-          ::body-params ::patient-data))
 
 (defn patient-edit-handler
   [request]
@@ -76,17 +83,13 @@
   (if (s/valid? ::patient-edit-request request)
     (let [res-data (api/patient-edit request)] 
       (r/as-http res-data (:headers {"content-type" "application/edn"})))
-    (r/as-http (r/as-incorrect (s/explain-data ::patient-edit-request request)))))
+    (r/as-http (r/as-incorrect (s/explain-data ::patient-edit-create-request request)))))
 
 
 ;;
 ;; patient-delete
 ;;
 
-(s/def ::patient-delete-request
-  (s/keys :req-un [::body-params]
-          ::body-params (s/keys :req-un [::id]
-                                ::id #(seq %))))
 
 (defn patient-delete-handler
   [request]
@@ -102,9 +105,6 @@
 ;; patient-create
 ;;
 
-(s/def ::patient-create-request
-  (s/keys :req-un [::body-params]
-          ::body-params ::patient-data))
 
 (defn patient-create-handler
   [request]
@@ -113,7 +113,8 @@
 (if (s/valid? ::patient-create-request request)
   (let [res-data (api/patient-create request)] 
     (r/as-http res-data (:headers {"content-type" "application/edn"})))
-  (r/as-http (r/as-incorrect (s/explain-data ::patient-create-request request)))))
+  (r/as-http (r/as-incorrect (s/explain-data ::patient-edit-create-request request)))))
+
 
 (defn not-found
   [request]

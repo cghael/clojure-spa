@@ -7,7 +7,7 @@
 
 (defn patient-list
   [{{:keys [limit page get-pages key search-data]} :params :as request}]
-  (let [limit' (Integer. limit)
+  (let [limit' (if limit (Integer. limit) 10)
         page' (Integer. page)
         get-pages' (Integer. get-pages)
         search-map (when search-data
