@@ -2,42 +2,13 @@
   (:require [ninja.unifier.response :as r]
             [taoensso.timbre :as log] 
             [db.core :refer [db]]
-            [clojure.java.jdbc :as jdbc]
-            [clojure.string :as string]
-            [clojure.walk :as walk]
-            [clj-time.coerce :as t]))
+            [clojure.java.jdbc :as jdbc]))
 
 
-(defn transform-query-data
-  [m]
-  (walk/postwalk (fn [x]
-                   (cond
-                     (instance? java.util.Date x)
-                     (.format (java.text.SimpleDateFormat. "yyyy-MM-dd") x)
-
-                     (keyword? x)
-                     (keyword (string/replace (name x) #"_" "-"))
-
-                     :else x))
-                 m))
+;; patient-list
 
 
-(defn transform-update-map
-  [m]
-  (walk/postwalk (fn [x]
-                   (cond
-                     (keyword? x)
-                     (keyword (string/replace (name x) #"-" "_"))
-
-                     (and (instance? java.lang.String x)
-                          (re-find #"\d{4}-\d{2}-\d{2}" x))
-                     (t/to-timestamp (t/from-string x))
-
-                     :else x))
-                 m))
-
-
-(defn create-where-string
+(defn- create-where-string
   [final-string params]
   (let [head (first params)
         tail (rest params)]
@@ -46,68 +17,58 @@
       (recur (str final-string head " and ") tail))))
 
 
-(defn add-where-params
-  [query-vec search-map]
-  (if (nil? search-map)
+(defn- add-where-params
+  [query-vec search-data]
+  (if (nil? search-data)
     query-vec
-    (let [search-vals (vals search-map)
+    (let [search-vals (vals search-data)
           search-params (map (fn [k]
                                (-> (name k)
-                                   (string/replace #"-" "_")
-                                   (#(if (= k :birth-date)
+                                   (#(if (= k :birth_date)
                                        (str % " = to_timestamp(?, 'YYYY-MM-DD')")
-                                       (str % " = ?"))))) (keys search-map))
+                                       (str % " = ?"))))) (keys search-data))
           where-string (create-where-string " where " search-params)]
       (-> query-vec
           (update 0 #(str % where-string))
           (into search-vals)))))
 
 
-(defn prepare-query-vec
-  [limit page get-pages search-map]
-  (let [query-limit (* limit get-pages)
-        query-offset (* (dec page) limit)
-        query-vec ["select * from spa.patients"]]
-    (-> query-vec
-        (add-where-params search-map)
-        (update 0 #(str % " order by last_name, name limit ? offset ?"))
-        (conj query-limit query-offset))))
-
-
-;; patient-list
+(defn- prepare-query-vec
+  [{:keys [limit offset search-data]}]
+  (-> ["select * from spa.patients"]
+      (add-where-params search-data)
+      (update 0 #(str % " order by last_name, name limit ? offset ?"))
+      (conj limit offset)))
 
 
 (defn patient-list
-  [limit page get-pages search-map]
+  [req-params]
   (try
-    (let [query-vec (prepare-query-vec limit page get-pages search-map)
+    (let [query-vec (prepare-query-vec req-params)
+          _ (log/info query-vec)
           res (jdbc/query db query-vec)
-          transformed-res (map #(transform-query-data %) res)]
-      (r/as-success {:data transformed-res}))
+          _ (clojure.pprint/pprint res)]
+      (r/as-success {:data res}))
     (catch Throwable e
       (log/error {:msg "ERROR db.patient-list"
                   :params e})
-      (r/as-unavailable {:error "Database is unavailable"}))))
+      (r/as-error {:error "Database is unavailable"}))))
 
 
 ;; patient-edit
 
 
 (defn patient-edit
-  [params]
+  [req-params id]
   (try
-    (let [id (:id params)
-          params (-> params
-                     (dissoc :id)
-                     (transform-update-map))
-          res (jdbc/update! db :spa.patients params ["id = ?" id])]
-      (if (= res '(1))
-        (r/as-accepted {:patient id})
-        (r/as-not-found {:patient id})))
+    (let [res (jdbc/update! db :spa.patients req-params ["id = ?" id])]
+      (if (empty? res)
+        (r/as-error {:patient id})
+        (r/as-success {:patient id})))
     (catch Throwable e
       (log/error {:msg "ERROR db.patient-update"
                   :params e})
-      (r/as-unavailable {:error "Database is unavailable"}))))
+      (r/as-error {:error "Database is unavailable"}))))
 
 
 ;; patient-delete
@@ -117,30 +78,24 @@
   [id]
   (try
     (let [res (jdbc/delete! db :spa.patients ["id = ?" id])]
-      (if (= res '(1))
-        (r/as-deleted {:id id})
-        (r/as-not-found {:id id})))
+      (if (empty? res)
+        (r/as-error {:id id})
+        (r/as-success {:id id})))
     (catch Throwable e
       (log/error {:msg "ERROR db.patient-delete"
                   :params e})
-      (r/as-unavailable {:error "Database is unavailable"}))))
+      (r/as-error {:error "Database is unavailable"}))))
 
 
 ;; patient-create
 
 
 (defn patient-create
-  [params]
+  [req-params]
   (try
-    (let [id (random-uuid)
-          params (-> params
-                     (assoc :id id)
-                     transform-update-map)
-          res (jdbc/insert! db :spa.patients params)]
-      (if res
-        (r/as-created {:patient res})
-        (r/as-conflict {:patient res})))
+    (let [res (jdbc/insert! db :spa.patients req-params)]
+      (r/as-success {:patient res}))
     (catch Throwable e
       (log/error {:msg "ERROR db.patient-delete"
                   :params e})
-      (r/as-unavailable {:error "Database is unavailable"}))))
+      (r/as-error {:error e}))))

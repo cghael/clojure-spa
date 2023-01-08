@@ -101,7 +101,7 @@
   (log/info {:msg "Request patient-edit"
              :params request}) 
   (if (s/valid? ::patient-edit-create-request request)
-    (let [res-data (api/patient-edit request)] 
+    (let [res-data (api/patient-edit (:body-params request))] 
       (r/as-http res-data (:headers {"content-type" "application/edn"})))
     (r/as-http (r/as-incorrect (s/explain-data ::patient-edit-create-request request)))))
 
@@ -116,7 +116,7 @@
   (log/info {:msg "Request patient-delete"
              :params request}) 
 (if (s/valid? ::patient-delete-request request)
-  (let [res-data (api/patient-delete request)] 
+  (let [res-data (api/patient-delete (:body-params request))] 
     (r/as-http res-data (:headers {"content-type" "application/edn"})))
   (r/as-http (r/as-incorrect (s/explain-data ::patient-delete-request request)))))
 
@@ -131,7 +131,7 @@
   (log/info {:msg "Request patient-create"
              :params request}) 
 (if (s/valid? ::patient-edit-create-request request)
-  (let [res-data (api/patient-create request)] 
+  (let [res-data (api/patient-create (:body-params request))] 
     (r/as-http res-data (:headers {"content-type" "application/edn"})))
   (r/as-http (r/as-incorrect (s/explain-data ::patient-edit-create-request request)))))
 
