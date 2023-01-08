@@ -6,21 +6,13 @@
 
 
 (defn patient-list
-  [{{:keys [limit page get-pages key search-data]} :params :as request}]
-  (let [limit' (if limit (Integer. limit) 10)
-        page' (Integer. page)
-        get-pages' (Integer. get-pages)
-        search-map (when search-data
-                    (reduce (fn [acc [k v]]
-                              (if (empty? v)
-                                acc
-                                (assoc acc k v))) {} search-data))
-        res-data (db/patient-list limit' page' get-pages' search-map)
+  [{:keys [limit page get-pages key search-data] :as params}]
+  (let [res-data (db/patient-list limit page get-pages search-data)
         res-data (assoc res-data :key key)]
     (if (r/-error? res-data)
       (do
         (log/error "db/patient-list error" {:res-data res-data 
-                                            :req-params (:params request)})
+                                            :req-params (:params params)})
         (r/as-error res-data))
       (do
         (log/info "db/patient-list success." res-data)

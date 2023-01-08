@@ -34,6 +34,40 @@
         (is (false? (s/valid? ::sut/patient-list-request req))))))
 
 
+  (testing "Patient-list conformed spec"
+    
+    ;; testing with all params
+    (let [params {:key "first"
+                  :limit "10"
+                  :get-pages "2"
+                  :page "1"}
+          res (s/conform ::sut/->transform-list-request params)
+          exp {:key "first"
+               :limit 10
+               :get-pages 2
+               :page 1}]
+      (is (= res exp)))
+
+    ;; testing without :limit
+    (let [params {:key "first"
+                  :get-pages "2"
+                  :page "1"}
+          res (s/conform ::sut/->transform-list-request params)
+          exp {:key "first"
+               :limit 10
+               :get-pages 2
+               :page 1}]
+      (is (= res exp)))
+    
+    ;; testing with invalid params
+    (let [params {:key "first"
+                  :limit "10"
+                  :get-pages ""
+                  :page "one"}
+          res (s/conform ::sut/->transform-list-request params)]
+      (is (s/invalid? res))))
+
+
   (testing "Patient-list spec testing with :search-params map"
     (let [req {:params {:key "first"
                         :limit "10"
@@ -132,16 +166,16 @@
 
 
 (deftest patient-delete-spec-test
-  
+
   (testing "With correct body-params"
     (let [req {:body-params {:id #uuid "2700cb34-04bc-448a-8a48-000000000021"}}]
       (is (true? (s/valid? ::sut/patient-delete-request req)))
-      
+
       (let [req (assoc-in req [:body-params :id] "2700cb34-04bc-448a-8a48-000000000021")]
         (is (false? (s/valid? ::sut/patient-edit-create-request req))))
-      
+
       (let [req (assoc-in req [:body-params :id] "")]
         (is (false? (s/valid? ::sut/patient-edit-create-request req))))
-      
+
       (let [req (assoc-in req [:body-params :id] nil)]
         (is (false? (s/valid? ::sut/patient-edit-create-request req)))))))

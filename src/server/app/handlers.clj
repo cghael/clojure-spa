@@ -57,6 +57,20 @@
 (s/def ::patient-delete-request
   (s/keys :req-un [::body-params]))
 
+(s/def ::->transform-list-request
+  (s/conformer
+   (fn [params]
+     (try
+       (-> params
+           (update :limit (fn [x]
+                            (if x 
+                              (Integer/parseInt x) 
+                              10)))
+           (update :page #(Integer/parseInt %))
+           (update :get-pages #(Integer/parseInt %)))
+       (catch Exception e
+         ::s/invalid)))))
+
 
 ;;
 ;; patient-list
@@ -68,8 +82,12 @@
   (log/info {:msg "Request patient-list" 
              :params (:params request)})
     (if (s/valid? ::patient-list-request request)
-      (let [res-data (api/patient-list request)]
-        (r/as-http res-data (:headers {"content-type" "application/edn"})))
+      (let [params (s/conform ::->transform-list-request (:params request))]
+        (if (s/invalid? params)
+          (r/as-http (r/as-incorrect {:error "invalid request params"
+                                      :request request}))
+          (-> (api/patient-list params)
+              (r/as-http (:headers {"content-type" "application/edn"})))))
       (r/as-http (r/as-incorrect (s/explain-data ::patient-list-request request)))))
 
 
