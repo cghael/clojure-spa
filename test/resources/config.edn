@@ -1,0 +1,28 @@
+{:db {:classname "org.postgresql.Driver"
+      :subprotocol "postgresql"
+      :host "localhost"
+      :port 6432
+      :dbname "test_database"
+      :dbtype "postgresql"
+      :user "user"
+      :password "password"}
+
+ :migratus {:store :database
+            :migration-dir "test/migrations/" 
+            :init-in-transaction? false
+            :migration-table-name "spa.migrations"
+            :db {:host "localhost"
+                 :port 6432
+                 :dbname "test_database"
+                 :dbtype "postgresql"
+                 :user "user"
+                 :password "password"}}
+
+ :pool {:minimum-idle 10
+        :maximum-pool-size 10
+        :adapter "postgresql"
+        :database-name "test_database"
+        :username "user"
+        :password "password"
+        :server-name "localhost"
+        :port-number 6432}}

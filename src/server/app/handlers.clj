@@ -46,13 +46,12 @@
   (s/keys :req-un [::params]))
 
 (s/def ::body-params 
-  (s/or :delete (s/keys :req-un [::id]) 
+  (s/or :delete (s/and #(= 1 (count % ))
+                       (s/keys :req-un [::id]) )
         :edit-create ::patient-data))
 
 (s/def ::patient-edit-create-request
   (s/keys :req-un [::body-params]))
-
-(s/valid? ::patient-edit-create-request {:body-params {:id #uuid "2700cb34-04bc-448a-8a48-000000000015", :name "Jesus", :last-name "Christ", :sex "male", :birth-date "0001-01-07", :adress "Israel, Nazareth, 7", :oms-number "3333 333333"}})
 
 (s/def ::patient-delete-request
   (s/keys :req-un [::body-params]))

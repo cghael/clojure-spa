@@ -45,9 +45,7 @@
   [req-params]
   (try
     (let [query-vec (prepare-query-vec req-params)
-          _ (log/info query-vec)
-          res (jdbc/query db query-vec)
-          _ (clojure.pprint/pprint res)]
+          res (jdbc/query db query-vec)]
       (r/as-success {:data res}))
     (catch Throwable e
       (log/error {:msg "ERROR db.patient-list"

@@ -9,8 +9,7 @@
 
 (defn stop!
   []
-  (let [
-        _ (migrations-down)
+  (let [_ (migrations-down config db)
         status (mount/stop #'server #'db)]
     status))
 
@@ -18,7 +17,7 @@
   []
   (let [status (mount/start #'config #'db #'server)
         _ (.addShutdownHook (Runtime/getRuntime) (Thread. stop!)) 
-        _ (migrations-up) 
+        _ (migrations-up config) 
         _ (log/info status)]
     status))
 

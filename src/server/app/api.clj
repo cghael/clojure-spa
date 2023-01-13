@@ -11,6 +11,8 @@
 
 
 (defn transform-response-map
+  "Transforms map sequence keys from underscore to dash 
+   and convert date instance to string 'yyyy-MM-dd'"
   [seq-m]
   (map #(walk/postwalk (fn [x]
                          (cond
@@ -24,17 +26,13 @@
                        %) seq-m))
 
 
-(defn transform-key
-  [k]
-  (-> (name k)
-      (string/replace #"-" "_")
-      keyword))
-
-
 (defn transform-map-keys
+  "Transforms keys from dash to underscore"
   [m]
   (reduce-kv (fn [acc k v]
-               (let [k (transform-key k)]
+               (let [k (-> (name k)
+                           (string/replace #"-" "_")
+                           keyword)]
                  (assoc acc k v))) {} m))
 
 
@@ -42,7 +40,7 @@
   [{:keys [limit page get-pages key search-data] :as params}]
   (let [query-limit (* limit get-pages)
         query-offset (* (dec page) limit)
-        search-data (when search-data (transform-map-keys search-data))
+        search-data (when search-data (transform-map-keys search-data)) 
         res-data (db/patient-list {:limit query-limit
                                    :offset query-offset
                                    :search-data search-data})]
@@ -51,8 +49,7 @@
         (log/error "db/patient-list error" {:res-data res-data
                                             :req-params (:params params)})
         (r/as-unavailable res-data))
-      (let [_ (log/info res-data)
-            res-data (-> res-data
+      (let [res-data (-> res-data
                          (update :data transform-response-map)
                          (assoc :key key))]
         (log/info "db/patient-list success." res-data)
@@ -67,7 +64,7 @@
   (let [id (:id params)
         req-params (-> params
                        (dissoc :id)
-                       (update :birth-date instant/read-instant-timestamp)
+                       (update :birth-date instant/read-instant-date)
                        transform-map-keys)
         res-data (db/patient-edit req-params id)]
     (if (r/-error? res-data)
@@ -105,7 +102,7 @@
   (let [id (random-uuid)
         req-params (-> params
                        (assoc :id id)
-                       (update :birth-date instant/read-instant-timestamp)
+                       (update :birth-date instant/read-instant-date)
                        transform-map-keys)
         res-data (db/patient-create req-params)]
     (if (r/-error? res-data)
