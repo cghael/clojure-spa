@@ -32,7 +32,8 @@
   (s/and ::ne-string #(re-matches #"^\d{4}\s\d{6}" %)))
 
 (s/def ::patient-data
-  (s/keys :req-un [::id ::name ::last-name ::sex ::birth-date ::adress ::oms-number]))
+  (s/keys :req-un [::name ::last-name ::sex ::birth-date ::adress ::oms-number]
+          :opt-un [::id]))
 
 (s/def ::search-data
   (s/and map? not-empty
@@ -46,7 +47,7 @@
   (s/keys :req-un [::params]))
 
 (s/def ::body-params 
-  (s/or :delete (s/and #(= 1 (count % ))
+  (s/or :delete (s/and #(= 1 (count %))
                        (s/keys :req-un [::id]) )
         :edit-create ::patient-data))
 
@@ -69,6 +70,13 @@
            (update :get-pages #(Integer/parseInt %)))
        (catch Exception e
          ::s/invalid)))))
+
+(s/valid? ::patient-edit-create-request {:name "Andrea"
+                                         :last-name "Bragnikov"
+                                         :sex "female"
+                                         :birth-date "1987-02-28"
+                                         :adress "Georgia, Kabuliti, St. Pushkina, 18"
+                                         :oms-number "9745 984392"})
 
 
 ;;

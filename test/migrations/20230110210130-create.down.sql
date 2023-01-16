@@ -1,17 +1,1 @@
-DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000004';
---;;
-
-DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000003';
---;;
-
-DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000002';
---;;
-
-DELETE FROM spa.patients WHERE id = '2700cb34-04bc-448a-8a48-000000000001';
---;;
-
 DROP TABLE IF EXISTS spa.patients CASCADE;
---;;
-
-DROP SCHEMA IF EXISTS spa;
---;;

@@ -1,6 +1,3 @@
-CREATE SCHEMA IF NOT EXISTS spa;
---;;
-
 CREATE TABLE IF NOT EXISTS spa.patients (
   id          uuid        PRIMARY KEY NOT NULL,
   name        text                    NOT NULL,

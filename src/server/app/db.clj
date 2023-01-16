@@ -92,7 +92,7 @@
   [req-params]
   (try
     (let [res (jdbc/insert! db :spa.patients req-params)]
-      (r/as-success {:patient res}))
+      (r/as-success {:patient (first res)}))
     (catch Throwable e
       (log/error {:msg "ERROR db.patient-delete"
                   :params e})

@@ -9,6 +9,7 @@
 
  :migratus {:store :database
             :migration-dir "test/migrations/" 
+            :init-script "init.sql"
             :init-in-transaction? false
             :migration-table-name "spa.migrations"
             :db {:host "localhost"

@@ -21,10 +21,12 @@
                  [migratus "1.4.6"]
                  [hikari-cp "3.0.1"]
                  [com.fzakaria/slf4j-timbre "0.3.21"]
-                 [clj-time "0.14.0"]] 
+                 [clojure.java-time "1.2.0"]] 
 
   :main ^:skip-aot core
 
   :target-path "target/%s"
 
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}}
+  
+  :test-selectors {:integration :integration})
