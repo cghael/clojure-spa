@@ -1,5 +1,5 @@
 (ns db.core
-  (:require [config :refer [config]]
+  (:require [server.app.config :refer [config]]
             [mount.core :as mount :refer [defstate]]
             [hikari-cp.core :as cp]))
 

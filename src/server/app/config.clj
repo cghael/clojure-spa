@@ -1,6 +1,7 @@
-(ns config
+(ns server.app.config
   (:require [mount.core :as mount :refer [defstate]]
             [clojure.edn :as edn]))
+
 
 (defstate config
   :start

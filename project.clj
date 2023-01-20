@@ -21,12 +21,24 @@
                  [migratus "1.4.6"]
                  [hikari-cp "3.0.1"]
                  [com.fzakaria/slf4j-timbre "0.3.21"]
-                 [clojure.java-time "1.2.0"]] 
+                 [clojure.java-time "1.2.0"]
+                 [thheller/shadow-cljs "2.20.14"]
+                 [reagent "0.8.1"]
+                 [cljs-ajax "0.7.5"]] 
 
-  :main ^:skip-aot core
+  :main ^:skip-aot server.app.core
 
   :target-path "target/%s"
+  
+  :clean-targets ^{:protect false} ["target"
+                                    "resources/public/js"]
 
-  :profiles {:uberjar {:aot :all}}
+  :profiles {:dev {:jvm-opts ["-Dconfig.file=dev/app/config/default.props"]}
+             :uberjar {:aot :all
+                       :prep-tasks ["compile"
+                                    ["run" "-m" "shadow.cljs.devtools.cli" "release" "app"]]
+                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}}
+  
+  :uberjar-name "clojure-spa.jar"
   
   :test-selectors {:integration :integration})

@@ -14,7 +14,7 @@
         query-str (str "select id from " table-name)
         table-ids (map :id
                        (jdbc/query db query-str))]
-    (run! #(migratus/down mirgate-config %) table-ids)))
+    (migratus/down mirgate-config table-ids)))
 
 
 (defn migrations-up
