@@ -7,6 +7,7 @@ pipeline {
                 // Insert build steps here, for example:
                 sh 'git clone https://github.com/cghael/clojure-spa.git'
                 sh 'cd clojure-spa'
+                sh 'lein deps'
                 sh 'lein uberjar'
             }
         }
