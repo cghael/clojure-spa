@@ -7,9 +7,9 @@ pipeline {
                 // Insert build steps here, for example:
                 // sh 'git clone https://github.com/cghael/clojure-spa.git'
                 // sh 'cd clojure-spa'
-                sh 'lein deps'
+                // sh 'lein deps'
                 sh 'lein uberjar'
-                
+
             }
         }
         stage('Test') {
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 // Insert deploy steps here, for example:
-                // sh 'cd ..'
+                // sh 'docker-compose up'
                 // sh 'rm -Rf clojure-spa'
             }
         }
