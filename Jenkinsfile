@@ -8,7 +8,8 @@ pipeline {
                 // sh 'git clone https://github.com/cghael/clojure-spa.git'
                 // sh 'cd clojure-spa'
                 sh 'lein deps'
-                // sh 'lein uberjar'
+                sh 'lein uberjar'
+                
             }
         }
         stage('Test') {
