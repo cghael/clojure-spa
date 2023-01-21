@@ -5,10 +5,10 @@ pipeline {
             steps {
                 echo 'Building...'
                 // Insert build steps here, for example:
-                sh 'git clone https://github.com/cghael/clojure-spa.git'
-                sh 'cd clojure-spa'
+                // sh 'git clone https://github.com/cghael/clojure-spa.git'
+                // sh 'cd clojure-spa'
                 sh 'lein deps'
-                sh 'lein uberjar'
+                // sh 'lein uberjar'
             }
         }
         stage('Test') {
@@ -22,8 +22,8 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 // Insert deploy steps here, for example:
-                sh 'cd ..'
-                sh 'rm -Rf clojure-spa'
+                // sh 'cd ..'
+                // sh 'rm -Rf clojure-spa'
             }
         }
     }
