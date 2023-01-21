@@ -17,7 +17,9 @@ pipeline {
             steps {
                 echo 'Testing...'
                 // Insert test steps here, for example:
-                // sh ''
+                sh 'docker-compose -f test/resources/docker-compose.test.yml up -d'
+                sh 'lein test'
+                sh 'docker-compose -f test/resources/docker-compose.test.yml down'
             }
         }
         stage('Deploy') {
