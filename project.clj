@@ -36,8 +36,7 @@
   :profiles {:dev {:jvm-opts ["-Dconfig.file=dev/app/config/default.props"]}
              :uberjar {:aot :all
                        :prep-tasks ["compile"
-                                    ["run" "-m" "shadow.cljs.devtools.cli" "release" "app"]
-                                    "npm install"]
+                                    ["run" "-m" "shadow.cljs.devtools.cli" "release" "app"]]
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}}
   
   :uberjar-name "clojure-spa.jar"
