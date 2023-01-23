@@ -8,8 +8,9 @@ RUN apt-get update && \
     chmod +x /usr/local/bin/lein && \
     lein
     
-RUN apt-get install -y nodejs npm git
-RUN npm install -g npm@latest
+RUN apt-get install -y nodejs
+RUN apt-get install -y npm
+RUN apt-get install -y git
 
 RUN curl -fsSL https://get.docker.com -o get-docker.sh
 RUN sh get-docker.sh
