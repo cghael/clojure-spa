@@ -14,9 +14,10 @@ pipeline {
             steps {
                 echo 'Testing...'
                 // Insert test steps here, for example:
-                sh 'docker-compose -f test/resources/docker-compose.test.yml up -d'
+                // sh 'docker-compose -f test/resources/docker-compose.test.yml up -d'
+                sh 'docker run -d --name db -p 6432:5432 -v /path/to/init.sql:/docker-entrypoint-initdb.d/init.sql -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=test_database postgres:latest'
                 sh 'lein test'
-                sh 'docker-compose -f test/resources/docker-compose.test.yml down'
+                sh 'docker stop db'
             }
         }
         stage('Deploy') {
