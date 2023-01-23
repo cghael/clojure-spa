@@ -1,0 +1,17 @@
+FROM jenkins/jenkins:2.387-jdk11
+
+USER root
+
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > /usr/local/bin/lein && \
+    chmod +x /usr/local/bin/lein && \
+    lein
+    
+RUN apt-get install -y nodejs npm git
+RUN npm install -g npm@latest
+
+RUN curl -fsSL https://get.docker.com -o get-docker.sh
+RUN sh get-docker.sh
+
+USER jenkins
