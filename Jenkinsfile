@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'Testing...'
                 sh 'pwd'
-                sh 'cat $(pwd)/src/db/migrations/init.sql'
+                sh 'cat $(pwd)/test/migrations/init.sql'
                 sh 'ls -l $(pwd)'
                 sh 'chmod +x $(pwd)/src/db/migrations/init.sql'
                 sh 'sudo docker run -d \
