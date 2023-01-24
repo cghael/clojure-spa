@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Create network') {
             steps {
-                sh 'docker network create mynetwork'
-                sh 'docker network connect mynetwork jenkins_container'
+                sh 'sudo docker network create mynetwork'
+                sh 'sudo docker network connect mynetwork jenkins_container'
             }
         }
         stage('Build') {
