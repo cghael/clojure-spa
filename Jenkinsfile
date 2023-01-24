@@ -4,7 +4,7 @@ pipeline {
         stage('Create network') {
             steps {
                 sh '''
-                    if [ -z "$(docker network ls -q --filter name=mynetwork)" ]; then
+                    if [ -z "$(sudo docker network ls -q --filter name=mynetwork)" ]; then
                       echo "Creating network mynetwork"
                       sudo docker network create mynetwork
                     else
