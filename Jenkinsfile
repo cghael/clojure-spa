@@ -3,7 +3,14 @@ pipeline {
     stages {
         stage('Create network') {
             steps {
-                sh 'sudo docker network create mynetwork'
+                sh '''
+                    if [ -z "$(docker network ls -q --filter name=mynetwork)" ]; then
+                      echo "Creating network mynetwork"
+                      sudo docker network create mynetwork
+                    else
+                      echo "Connecting to existing network mynetwork"
+                    fi
+                '''
                 sh 'sudo docker network connect mynetwork jenkins_container'
             }
         }
@@ -22,7 +29,8 @@ pipeline {
                 sh 'sudo docker run -d --name db --network mynetwork -p 5432:5432 -v /path/to/init.sql:/docker-entrypoint-initdb.d/init.sql -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=test_database postgres:latest'
                 sh 'lein test :unit'
                 sh 'lein test :integration'
-                sh 'docker stop db'
+                sh 'sudo docker stop db'
+                sh 'sudo docker rm db'
             }
         }
         stage('Deploy') {
