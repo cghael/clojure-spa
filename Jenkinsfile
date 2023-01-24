@@ -39,7 +39,8 @@ pipeline {
                                     -e POSTGRES_USER=user \
                                     -e POSTGRES_PASSWORD=password \
                                     -e POSTGRES_DB=test_database postgres:latest \
-                                    ls -l /docker-entrypoint-initdb.d'
+                                    ls -l /docker-entrypoint-initdb.d \
+                                    ls -l /docker-entrypoint-initdb.d/init.sql'
                 // sh 'lein test :unit'
                 // sh 'lein test :integration'
                 // sh 'sudo docker stop db'
