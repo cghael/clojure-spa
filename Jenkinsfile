@@ -7,11 +7,12 @@ pipeline {
                     if [ -z "$(sudo docker network ls -q --filter name=mynetwork)" ]; then
                       echo "Creating network mynetwork"
                       sudo docker network create mynetwork
+                      sudo docker network connect mynetwork jenkins_container
                     else
                       echo "Connecting to existing network mynetwork"
                     fi
                 '''
-                sh 'sudo docker network connect mynetwork jenkins_container'
+                // sh 'sudo docker network connect mynetwork jenkins_container'
             }
         }
         stage('Build') {
