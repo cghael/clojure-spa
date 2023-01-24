@@ -71,13 +71,6 @@
        (catch Exception e
          ::s/invalid)))))
 
-(s/valid? ::patient-edit-create-request {:name "Andrea"
-                                         :last-name "Bragnikov"
-                                         :sex "female"
-                                         :birth-date "1987-02-28"
-                                         :adress "Georgia, Kabuliti, St. Pushkina, 18"
-                                         :oms-number "9745 984392"})
-
 
 ;;
 ;; patient-list
