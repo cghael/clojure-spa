@@ -51,7 +51,9 @@
                                             :req-params (:params params)})
         (r/as-unavailable res-data))
       (let [res-data (-> res-data
-                         (update :data #(map transform-response-map %))
+                         (update :data #(reduce (fn [acc m]
+                                                  (conj acc (transform-response-map m))) 
+                                                {} %))
                          (assoc :key key))]
         (log/info "db/patient-list success." res-data)
         (r/as-success res-data)))))
@@ -73,7 +75,7 @@
         (log/error "db/patient-edit error" {:res-data res-data
                                             :req-params params})
         (r/as-unavailable (assoc res-data :error "DB error")))
-      (do
+      (let [res-data (update res-data :patient transform-response-map)]
         (log/info "db/patient-edit success." res-data)
         (r/as-accepted res-data)))))
 

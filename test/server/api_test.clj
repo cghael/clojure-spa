@@ -1,8 +1,9 @@
-(ns server.api-test
+(ns ^:unit server.api-test
   (:require [server.app.api :as sut]
             [server.app.db :as db]
             [ninja.unifier.response :as r]
-            [clojure.test :refer :all]))
+            [clojure.test :refer :all]
+            [java-time.api :as jt]))
 
 
 (deftest transform-response-map-test
@@ -67,7 +68,7 @@
 
   (testing "Testing patient-edit"
     (with-redefs [db/patient-edit (fn [m id]
-                                    (r/as-success (assoc m :id id)))]
+                                    (r/as-success {:patient (assoc m :id id)}))]
 
       (let [params {:id #uuid "2700cb34-04bc-448a-8a48-000000000021"
                     :name "Anton"
@@ -76,14 +77,16 @@
                     :birth-date "1990-01-07"
                     :adress "Georgia, Batumi, Mayakovskaya St., 13"
                     :oms-number "4444 666666"}
-            exp {:id #uuid "2700cb34-04bc-448a-8a48-000000000021"
-                 :name "Anton"
-                 :last_name "Gorobets"
-                 :sex "male"
-                 :birth_date #inst "1990-01-07T00:00:00.000-00:00"
-                 :adress "Georgia, Batumi, Mayakovskaya St., 13"
-                 :oms_number "4444 666666"}]
-        (is (= (sut/patient-edit params) exp)))))
+            exp {:patient {:id #uuid "2700cb34-04bc-448a-8a48-000000000021"
+                           :name "Anton"
+                           :last-name "Gorobets"
+                           :sex "male"
+                           :birth-date (jt/local-date "yyyy-MM-dd" "1990-01-07")
+                           :adress "Georgia, Batumi, Mayakovskaya St., 13"
+                           :oms-number "4444 666666"}}
+            res (sut/patient-edit params)]
+        (is (not (r/error? res)))
+        (is (= res exp)))))
 
 
   (testing "Testing patient-delete"
@@ -95,7 +98,7 @@
 
 
   (testing "Testing patient-create"
-    (with-redefs [db/patient-create (fn [m] (r/as-success m))]
+    (with-redefs [db/patient-create (fn [m] (r/as-success {:patient m}))]
 
       (let [params {:name "Anton"
                     :last-name "Gorobets"
@@ -104,13 +107,14 @@
                     :adress "Georgia, Batumi, Mayakovskaya St., 13"
                     :oms-number "4444 666666"}
             res (sut/patient-create params)
-            id (:id res)
-            exp {:name "Anton"
-                 :last_name "Gorobets"
-                 :sex "male"
-                 :birth_date #inst "1990-01-07T00:00:00.000-00:00"
-                 :adress "Georgia, Batumi, Mayakovskaya St., 13"
-                 :oms_number "4444 666666"}
-            exp (assoc exp :id id)]
+            id (-> res :patient :id)
+            exp {:patient {:name "Anton"
+                           :last-name "Gorobets"
+                           :sex "male"
+                           :birth-date (jt/local-date "yyyy-MM-dd" "1990-01-07")
+                           :adress "Georgia, Batumi, Mayakovskaya St., 13"
+                           :oms-number "4444 666666"}}
+            exp (assoc-in exp [:patient :id] id)]
+        (is (not (r/error? res)))
         (is (not (nil? id)))
         (is (= res exp))))))

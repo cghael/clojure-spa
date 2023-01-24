@@ -1,4 +1,4 @@
-(ns server.handlers-test
+(ns ^:unit server.handlers-test
   (:require [server.app.handlers :as sut]
             [clojure.test :refer :all]
             [clojure.spec.alpha :as s]))
@@ -157,8 +157,8 @@
       (is (true? (s/valid? ::sut/patient-edit-create-request ok-request)))
 
 
-      (testing "With lost param"
-        (let [keys #{:id :name :last-name :sex :birth-date :adress :oms-number}]
+      (testing "With lost :req-un param"
+        (let [keys #{:name :last-name :sex :birth-date :adress :oms-number}]
           (doseq [k keys]
             (testing (str k)
               (let [request (update ok-request :body-params dissoc k)]

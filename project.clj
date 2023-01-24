@@ -41,4 +41,5 @@
   
   :uberjar-name "clojure-spa.jar"
   
-  :test-selectors {:integration :integration})
+  :test-selectors {:integration :integration
+                   :unit :unit})
