@@ -35,7 +35,7 @@ pipeline {
                                     --name db \
                                     --network mynetwork \
                                     -p 6432:5432 \
-                                    --mount type=bind,src=$(pwd)/src/db/migrations/init.sql,dst=/docker-entrypoint-initdb.d/init.sql \
+                                    --mount type=bind,src=$(pwd)/src/db/migrations/,dst=/docker-entrypoint-initdb.d/ \
                                     -e POSTGRES_USER=user \
                                     -e POSTGRES_PASSWORD=password \
                                     -e POSTGRES_DB=test_database postgres:latest \
