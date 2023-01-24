@@ -6,7 +6,7 @@ pipeline {
                 echo 'Building...'
                 sh 'lein deps'
                 sh 'npm install'
-                sh 'lein uberjar'
+                // sh 'lein uberjar'
 
             }
         }
