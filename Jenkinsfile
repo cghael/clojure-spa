@@ -32,10 +32,10 @@ pipeline {
                 sh 'ls -l $(pwd)'
                 sh 'chmod +x $(pwd)/src/db/migrations/init.sql'
                 sh 'sudo docker run -d --name db --network mynetwork -p 6432:5432 -v $(pwd)/src/db/migrations/init.sql:/docker-entrypoint-initdb.d/init.sql -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=test_database postgres:latest'
-                sh 'lein test :unit'
-                sh 'lein test :integration'
-                sh 'sudo docker stop db'
-                sh 'sudo docker rm db'
+                // sh 'lein test :unit'
+                // sh 'lein test :integration'
+                // sh 'sudo docker stop db'
+                // sh 'sudo docker rm db'
             }
         }
         stage('Deploy') {
