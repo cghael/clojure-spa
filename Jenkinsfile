@@ -27,15 +27,16 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'sudo docker run -d \
-                                    --name db \
-                                    --network mynetwork \
-                                    -p 6432:5432 \
-                                    --volumes-from jenkins_container \
-                                    --mount type=bind,src=/var/jenkins_home/workspace/spa-pipeline/test/migrations/init.sql,dst=/docker-entrypoint-initdb.d/init.sql \
-                                    -e POSTGRES_USER=user \
-                                    -e POSTGRES_PASSWORD=password \
-                                    -e POSTGRES_DB=test_database postgres:latest'
+                sh 'docker build -f test/resources/Dockerfile -t mydb:latest .'
+                // sh 'sudo docker run -d \
+                //                     --name db \
+                //                     --network mynetwork \
+                //                     -p 6432:5432 \
+                //                     --volumes-from jenkins_container \
+                //                     --mount type=bind,src=/var/jenkins_home/workspace/spa-pipeline/test/migrations/init.sql,dst=/docker-entrypoint-initdb.d/init.sql \
+                //                     -e POSTGRES_USER=user \
+                //                     -e POSTGRES_PASSWORD=password \
+                //                     -e POSTGRES_DB=test_database postgres:latest'
                 // sh 'lein test :unit'
                 // sh 'lein test :integration'
                 // sh 'sudo docker stop db'
