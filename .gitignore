@@ -13,3 +13,7 @@ target
 .calva/
 .calva/output-window/output.calva-repl
 .lsp/.cache/db.transit.json
+.clj-kondo/com.github.seancorfield/next.jdbc/config.edn
+.clj-kondo/com.github.seancorfield/next.jdbc/hooks/com/github/seancorfield/next_jdbc.clj
+.lein-docker-env
+.lein-failures

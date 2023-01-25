@@ -37,16 +37,14 @@ pipeline {
                                 mydb:latest'
                 sh 'lein test :unit'
                 sh 'lein test :integration'
-                // sh 'sudo docker stop db'
-                // sh 'sudo docker rm db'
+                sh 'sudo docker stop db'
+                sh 'sudo docker rm db'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
                 // Insert deploy steps here, for example:
-                // sh 'docker-compose up'
-                // sh 'rm -Rf clojure-spa'
             }
         }
     }
