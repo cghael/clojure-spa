@@ -4,7 +4,7 @@
             [taoensso.timbre :as log]
             [clojure.walk :as walk]
             [clojure.string :as string]
-            [clojure.instant :as instant]
+            ;; [clojure.instant :as instant]
             [java-time.api :as jt]))
 
 
@@ -50,10 +50,8 @@
         (log/error "db/patient-list error" {:res-data res-data
                                             :req-params (:params params)})
         (r/as-unavailable res-data))
-      (let [res-data (-> res-data
-                         (update :data #(reduce (fn [acc m]
-                                                  (conj acc (transform-response-map m))) 
-                                                {} %))
+      (let [res-data (-> res-data 
+                         (update :data transform-response-map) 
                          (assoc :key key))]
         (log/info "db/patient-list success." res-data)
         (r/as-success res-data)))))

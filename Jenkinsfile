@@ -12,7 +12,6 @@ pipeline {
                       echo "Connecting to existing network mynetwork"
                     fi
                 '''
-                // sh 'sudo docker network connect mynetwork jenkins_container'
             }
         }
         stage('Build') {
@@ -36,16 +35,7 @@ pipeline {
                                 -e POSTGRES_PASSWORD=password \
                                 -e POSTGRES_DB=test_database \
                                 mydb:latest'
-                // sh 'sudo docker run -d \
-                //                     --name db \
-                //                     --network mynetwork \
-                //                     -p 6432:5432 \
-                //                     --volumes-from jenkins_container \
-                //                     --mount type=bind,src=/var/jenkins_home/workspace/spa-pipeline/test/migrations/init.sql,dst=/docker-entrypoint-initdb.d/init.sql \
-                //                     -e POSTGRES_USER=user \
-                //                     -e POSTGRES_PASSWORD=password \
-                //                     -e POSTGRES_DB=test_database postgres:latest'
-                // sh 'lein test :unit'
+                sh 'lein test :unit'
                 sh 'lein test :integration'
                 // sh 'sudo docker stop db'
                 // sh 'sudo docker rm db'
