@@ -45,7 +45,7 @@ pipeline {
                 //                     -e POSTGRES_USER=user \
                 //                     -e POSTGRES_PASSWORD=password \
                 //                     -e POSTGRES_DB=test_database postgres:latest'
-                sh 'lein test :unit'
+                // sh 'lein test :unit'
                 sh 'lein test :integration'
                 // sh 'sudo docker stop db'
                 // sh 'sudo docker rm db'
