@@ -27,7 +27,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'docker build -f test/resources/Dockerfile -t mydb:latest .'
+                sh 'sudo docker build -f test/resources/Dockerfile -t mydb:latest .'
                 // sh 'sudo docker run -d \
                 //                     --name db \
                 //                     --network mynetwork \
