@@ -1,7 +1,7 @@
 {:db {:classname "org.postgresql.Driver"
       :subprotocol "postgresql"
       :host "db"
-      :port 6432
+      :port 5432
       :dbname "test_database"
       :dbtype "postgresql"
       :user "user"
@@ -13,7 +13,7 @@
             :init-in-transaction? false
             :migration-table-name "spa.migrations"
             :db {:host "db"
-                 :port 6432
+                 :port 5432
                  :dbname "test_database"
                  :dbtype "postgresql"
                  :user "user"
@@ -26,4 +26,4 @@
         :username "user"
         :password "password"
         :server-name "db"
-        :port-number 6432}}
+        :port-number 5432}}
