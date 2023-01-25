@@ -32,12 +32,10 @@ pipeline {
                                     --network mynetwork \
                                     -p 6432:5432 \
                                     --volumes-from jenkins_container \
-                                    --mount type=bind,src=$(pwd)/test/migrations/init.sql,dst=/docker-entrypoint-initdb.d/init.sql \
+                                    --mount type=bind,src=/var/jenkins_home/workspace/spa-pipeline/test/migrations/init.sql,dst=/docker-entrypoint-initdb.d/init.sql \
                                     -e POSTGRES_USER=user \
                                     -e POSTGRES_PASSWORD=password \
-                                    -e POSTGRES_DB=test_database postgres:latest \
-                                    ls -l /docker-entrypoint-initdb.d \
-                                    ls -l /docker-entrypoint-initdb.d/init.sql'
+                                    -e POSTGRES_DB=test_database postgres:latest'
                 // sh 'lein test :unit'
                 // sh 'lein test :integration'
                 // sh 'sudo docker stop db'
