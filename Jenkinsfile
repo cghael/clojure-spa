@@ -45,7 +45,7 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 sh 'sudo docker build -f resources/db/Dockerfile -t clojure-spa-db .'
-                sh 'sudo docker tag clojure-spa-db cghael/mclojure-spa-db:latest'
+                sh 'sudo docker tag clojure-spa-db cghael/clojure-spa-db:latest'
                 sh 'sudo docker push cghael/clojure-spa-db:latest'
 
                 sh 'sudo docker build . -t clojure-spa-app'
