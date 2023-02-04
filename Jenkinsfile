@@ -19,7 +19,7 @@ pipeline {
                 echo 'Building...'
                 sh 'lein deps'
                 sh 'npm install'
-                // sh 'lein uberjar'
+                sh 'lein uberjar'
 
             }
         }
@@ -44,8 +44,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                sh 'sudo docker build -f resources/db/Dockerfile -t mydb:latest .'
-                sh 'sudo docker build clojure-spa-app:latest .'
+                sh 'sudo docker build -f resources/db/Dockerfile -t clojure-spa-db .'
+                sh 'sudo docker tag clojure-spa-db cghael/mclojure-spa-db:latest'
+                sh 'sudo docker push cghael/clojure-spa-db:latest'
+
+                sh 'sudo docker build . -t clojure-spa-app'
+                sh 'sudo docker tag clojure-spa-app cghael/clojure-spa-app:latest'
+                sh 'sudo docker push cghael/clojure-spa-app:latest'
             }
         }
     }
