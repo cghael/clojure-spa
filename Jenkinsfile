@@ -44,7 +44,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                // Insert deploy steps here, for example:
+                sh 'sudo docker build -f resources/db/Dockerfile -t mydb:latest .'
+                sh 'sudo docker build clojure-spa-app:latest .'
             }
         }
     }
