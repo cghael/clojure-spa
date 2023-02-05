@@ -6,7 +6,7 @@ pipeline {
                 script {
                     def container_inspect = sh script: 'sudo docker inspect jenkins_container', returnStdout: true
                     def network_id = sh(script: 'echo $container_inspect | jq -r \'./.[].NetworkSettings.Networks["mynetwork"]\'', returnStdout: true).trim()
-                    if (network_id != null) {
+                    if (network_id == null) {
                         sh 'echo "Creating network mynetwork"'
                         sh 'sudo docker network create mynetwork'
                         sh 'sudo docker network connect mynetwork jenkins_container'
