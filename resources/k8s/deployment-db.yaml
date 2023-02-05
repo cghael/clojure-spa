@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: db-deployment
+  labels:
+    name: db-deployment
+    app: clojure-spa-app
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: db-pod
+      app: clojure-spa-app
+
+  template:
+    metadata:
+      name: db-pod
+      labels:
+        name: db-pod
+        app: clojure-spa-app
+    spec:
+      containers:
+        - name: clojure-spa-db
+          image: cghael/clojure-spa-db
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "user"
+            - name: POSTGRES_PASSWORD
+              value: "password"
