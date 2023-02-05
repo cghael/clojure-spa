@@ -3,16 +3,16 @@ pipeline {
     stages {
         stage('Create network') {
             steps {
-                sh 'container_inspect=$(sudo docker inspect jenkins_container)'
-                sh 'network_id=$(echo $container_inspect | jq -r ''.[].NetworkSettings.Networks["mynetwork"]'')'
-                sh '''
-                    if [ "$network_id" != "null" ]; then
-                        echo "Creating network mynetwork"
-                        sudo docker network create mynetwork"
-                        sudo docker network connect mynetwork jenkins_container
-                    else
-                        echo "Connecting to existing network mynetwork"
-                '''
+                script {
+                    def network_id = sh(script: 'echo $container_inspect | jq -r '\''./.[].NetworkSettings.Networks["mynetwork"]\'\'', returnStdout: true).trim()
+                    if (network_id != null) {
+                        sh 'echo "Creating network mynetwork"'
+                        sh 'sudo docker network create mynetwork'
+                        sh 'sudo docker network connect mynetwork jenkins_container'
+                    } else {
+                        sh 'echo "Connecting to existing network mynetwork"'
+                    }
+                }
             }
         }
         stage('Build') {
