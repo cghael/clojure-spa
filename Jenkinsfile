@@ -61,8 +61,8 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 // sh 'eval $(minikube -p minikube docker-env)'
-                sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
-                sh 'kubectl apply -f resources/k8s/service-db.yaml'
+                sh 'kubectl --kubeconfig /kubeconfig.yaml apply -f resources/k8s/deployment-db.yaml'
+                sh 'kubectl --kubeconfig /kubeconfig.yaml apply -f resources/k8s/service-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/deployment-app.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-app.yaml'
             }
