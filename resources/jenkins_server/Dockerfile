@@ -7,7 +7,7 @@ RUN apt-get install -y sudo
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 RUN apt-get install -y openjdk-17-jdk
-RUN apt-get install jq
+RUN apt-get install -y jq
 RUN apt-get install -y curl
 RUN curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > /usr/local/bin/lein 
 RUN chmod +x /usr/local/bin/lein && lein
