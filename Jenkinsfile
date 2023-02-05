@@ -4,9 +4,7 @@ pipeline {
         stage('Create network') {
             steps {
                 sh '''
-                    container_inspect=$(sudo docker inspect jenkins_container)
-                    network_id=$(echo $container_inspect | jq -r '.[].NetworkSettings.Networks["mynetwork"]')
-                    if [ "$network_id" != "null" ]; then
+                    if [ "sudo docker inspect jenkins_container | jq -r '.[].NetworkSettings.Networks["mynetwork"]')" != "null" ]; then
                       echo "Creating network mynetwork"
                       sudo docker network create mynetwork
                       sudo docker network connect mynetwork jenkins_container
