@@ -30,7 +30,7 @@ pipeline {
                 sh 'sudo docker run -d \
                                 --name db \
                                 --network mynetwork \
-                                -p 6432:5432 \
+                                -p 5432:5432 \
                                 -e POSTGRES_USER=user \
                                 -e POSTGRES_PASSWORD=password \
                                 -e POSTGRES_DB=test_database \
