@@ -2,9 +2,9 @@ pipeline {
     agent any
     stages {
         stage('Create network') {
-            container_inspect = sh(script: 'sudo docker inspect jenkins_container', returnStdout: true)
-            network_id = sh(script: "echo $container_inspect | jq -r '.[].NetworkSettings.Networks[\"mynetwork\"]'", returnStdout: true)
-            if (network_id != 'null') {
+            def container_inspect = sh(script: 'sudo docker inspect jenkins_container', returnStdout: true)
+            def network_id = container_inspect?.trim() | jq -r '.[].NetworkSettings.Networks["mynetwork"]'
+            if (network_id && network_id != "null") {
                 echo "Creating network mynetwork"
                 sh "sudo docker network create mynetwork"
                 sh "sudo docker network connect mynetwork jenkins_container"
