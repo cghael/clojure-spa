@@ -4,7 +4,9 @@ pipeline {
         stage('Create network') {
             steps {
                 sh '''
-                    if [ -z "$(sudo docker network ls -q --filter name=mynetwork)" ]; then
+                    container_inspect=$(sudo docker inspect jenkins_container)
+                    network_id=$(echo $container_inspect | jq -r '.[].NetworkSettings.Networks["mynetwork"]')
+                    if [ "$network_id" != "null" ]; then
                       echo "Creating network mynetwork"
                       sudo docker network create mynetwork
                       sudo docker network connect mynetwork jenkins_container
@@ -58,7 +60,7 @@ pipeline {
         }
         stage('Deploy to Minikube') {
             steps {
-                sh 'eval $(minikube -p minikube docker-env)'
+                // sh 'eval $(minikube -p minikube docker-env)'
                 sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 sh 'kubectl apply -f resources/k8s/service-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/deployment-app.yaml'
