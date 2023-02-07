@@ -69,6 +69,7 @@ pipeline {
                 // sh 'kubectl config view'
                 // sh 'echo $DECODE_TOKEN'
                 // sh 'echo $KUBECONFIG'
+                sh 'minikube ip'
                 sh 'export KUBECONFIG=~/config'
                 // sh 'sudo cat ~/config'
                 sh 'kubectl config view'
