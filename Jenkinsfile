@@ -68,7 +68,7 @@ pipeline {
                 // sh 'kubectl config use-context cci'
                 // sh 'kubectl config view'
                 // sh 'echo $DECODE_TOKEN'
-                sh 'kubectl --username=system:serviceaccount:default:jenkins --token=$KUBER_TOKEN get pods'
+                sh 'kubectl --token=$KUBER_TOKEN get pods'
                 // sh 'eval $(minikube -p minikube docker-env)'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
