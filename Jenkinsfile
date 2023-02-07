@@ -70,7 +70,7 @@ pipeline {
                 // sh 'echo $DECODE_TOKEN'
                 sh 'export KUBECONFIG=/new-config'
                 // sh 'kubectl config use-context cicd-ctx'
-                sh 'kubectl get pods'
+                sh 'kubectl get pods --username=cicd'
                 // sh 'eval $(minikube -p minikube docker-env)'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
