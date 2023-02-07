@@ -67,7 +67,7 @@ pipeline {
                 sh 'kubectl config set-context cci --user=jenkins-sa --cluster=minikube'
                 sh 'kubectl config use-context cci'
                 sh 'kubectl config view'
-                sh 'kubectl cluster-info'
+                sh 'kubectl cluster-info --username=jenkins-sa'
                 // sh 'eval $(minikube -p minikube docker-env)'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
