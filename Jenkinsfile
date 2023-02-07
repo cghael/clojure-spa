@@ -67,6 +67,7 @@ pipeline {
                 sh 'kubectl config set-context default --user=jenkins-sa --cluster=minikube'
                 sh 'kubectl config use-context default'
                 sh 'kubectl config view'
+                sh 'kubectl get pods'
                 // sh 'eval $(minikube -p minikube docker-env)'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
