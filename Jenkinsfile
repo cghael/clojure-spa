@@ -60,15 +60,15 @@ pipeline {
         // }
         stage('Deploy to Minikube') {
             steps {
-                sh 'DECODE_TOKEN=$(echo ${KUBER_TOKEN} | base64 -d)'
+                // sh 'DECODE_TOKEN=$(echo $KUBER_TOKEN | base64 -d)'
                 // sh 'echo $KUBER_CERT | base64 -d > ca.crt'
                 // sh 'kubectl config set-cluster minikube --server=${SERVER_ENDPOINT} --certificate-authority=ca.crt'
                 // sh 'kubectl config set-credentials jenkins-sa --token=${DECODE_TOKEN}'
                 // sh 'kubectl config set-context cci --user=jenkins-sa --cluster=minikube'
                 // sh 'kubectl config use-context cci'
                 // sh 'kubectl config view'
-                sh 'echo $DECODE_TOKEN'
-                sh 'kubectl --username=system:serviceaccount:default:sa-jenkins --token=$DECODE_TOKEN get pods'
+                // sh 'echo $DECODE_TOKEN'
+                sh 'kubectl --username=system:serviceaccount:default:sa-jenkins --token=$KUBER_TOKEN get pods'
                 // sh 'eval $(minikube -p minikube docker-env)'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
