@@ -64,6 +64,8 @@ pipeline {
                 sh 'echo $KUBER_CERT | base64 -d > ca.crt'
                 sh 'kubectl config set-cluster minikube --server=${SERVER_ENDPOINT} --certificate-authority=ca.crt'
                 sh 'kubectl config set-credentials jenkins-sa --token=${DECODE_TOKEN}'
+                sh 'kubectl set-contex default --user=jenkins-sa --cluster=minikube'
+                sh 'kubectl config use-contex default'
                 sh 'kubectl config view'
                 // sh 'eval $(minikube -p minikube docker-env)'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
