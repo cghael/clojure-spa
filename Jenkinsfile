@@ -73,7 +73,7 @@ pipeline {
                 sh 'sudo cat ~/config'
                 sh 'kubectl config view'
                 // sh 'kubectl config use-context cicd-ctx'
-                sh 'kubectl get pods --kubeconfig=~/config'
+                sh 'kubectl get pods --kubeconfig=/var/jenkins_home/config'
                 // sh 'eval $(minikube -p minikube docker-env)'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
