@@ -74,7 +74,7 @@ pipeline {
                 sh 'kubectl config view'
                 sh 'kubectl config use-context cicd-ctx'
                 // sh 'kubectl config use-context cicd-ctx'
-                sh 'sudo kubectl get pods'
+                sh 'kubectl get pods'
                 // sh 'eval $(minikube -p minikube docker-env)'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
