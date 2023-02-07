@@ -70,7 +70,7 @@ pipeline {
                 // sh 'echo $DECODE_TOKEN'
                 sh 'echo $KUBECONFIG'
                 sh 'export KUBECONFIG=~/config'
-                sh 'cat ~/config'
+                sh 'sudo cat ~/config'
                 sh 'kubectl config view'
                 // sh 'kubectl config use-context cicd-ctx'
                 sh 'kubectl get pods --kubeconfig=~/config'
