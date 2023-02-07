@@ -60,7 +60,7 @@ pipeline {
         // }
         stage('Deploy to Minikube') {
             steps {
-                sh 'export DECODE_TOKEN=$(echo ${KUBER_TOKEN} | base64 -d)'
+                sh 'DECODE_TOKEN=$(echo ${KUBER_TOKEN} | base64 -d)'
                 // sh 'echo $KUBER_CERT | base64 -d > ca.crt'
                 // sh 'kubectl config set-cluster minikube --server=${SERVER_ENDPOINT} --certificate-authority=ca.crt'
                 // sh 'kubectl config set-credentials jenkins-sa --token=${DECODE_TOKEN}'
