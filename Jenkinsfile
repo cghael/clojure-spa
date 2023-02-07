@@ -72,6 +72,7 @@ pipeline {
                 sh 'export KUBECONFIG=~/config'
                 // sh 'sudo cat ~/config'
                 sh 'kubectl config view'
+                sh 'kubectl config use-context cicd-ctx'
                 // sh 'kubectl config use-context cicd-ctx'
                 sh 'sudo kubectl get pods'
                 // sh 'eval $(minikube -p minikube docker-env)'
