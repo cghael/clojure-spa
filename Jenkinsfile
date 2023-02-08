@@ -71,7 +71,7 @@ pipeline {
                 sh 'cat resources/k8s/new-config'
                 // sh 'export KUBECONFIG=resources/k8s/new-config'
                 sh 'echo $KUBECONFIG'
-                sh 'kubectl config view'
+                sh 'sudo kubectl config view'
                 // sh 'echo $DECODE_TOKEN'
                 // sh 'echo $KUBECONFIG'
                 // sh 'minikube ip'
