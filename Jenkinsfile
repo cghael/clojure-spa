@@ -16,12 +16,12 @@ pipeline {
         //         }
         //     }
         // }
-        // stage('Build') {
-        //     steps {
-        //         echo 'Building...'
-        //         sh 'lein deps'
-        //         sh 'npm install'
-        //         sh 'lein uberjar'
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                sh 'lein deps'
+                sh 'npm install'
+                sh 'lein uberjar'
 
         //     }
         // }
@@ -69,13 +69,13 @@ pipeline {
                 // sh 'kubectl config view'
                 // sh 'echo $DECODE_TOKEN'
                 // sh 'echo $KUBECONFIG'
-                sh 'minikube ip'
-                sh 'export KUBECONFIG=~/config'
-                // sh 'sudo cat ~/config'
-                sh 'kubectl config view'
-                sh 'kubectl config use-context cicd-ctx'
+                // sh 'minikube ip'
+                // sh 'export KUBECONFIG=~/config'
+                // // sh 'sudo cat ~/config'
+                // sh 'kubectl config view'
                 // sh 'kubectl config use-context cicd-ctx'
-                sh 'kubectl get pods'
+                // // sh 'kubectl config use-context cicd-ctx'
+                // sh 'kubectl get pods'
                 // sh 'eval $(minikube -p minikube docker-env)'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
