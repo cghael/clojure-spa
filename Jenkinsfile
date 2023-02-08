@@ -69,7 +69,7 @@ pipeline {
                 // sh 'kubectl config set-context cci --user=jenkins-sa --cluster=minikube'
                 // sh 'kubectl config use-context cci'
                 sh 'cat resources/k8s/new-config'
-                sh 'export KUBECONFIG=resources/k8s/new-config'
+                // sh 'export KUBECONFIG=resources/k8s/new-config'
                 sh 'echo $KUBECONFIG'
                 sh 'kubectl config view'
                 // sh 'echo $DECODE_TOKEN'
