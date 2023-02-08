@@ -44,31 +44,31 @@ pipeline {
         //     }
         // }
 
-        stage('Build and Push Docker Image') {
-            steps {
-                echo 'Building and pushing...'
-                withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB_CREDENTIALS', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USER')]) {
-                    sh 'sudo docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD'
-                    sh 'sudo docker build -f resources/db/Dockerfile -t clojure-spa-db .'
-                    sh 'sudo docker tag clojure-spa-db cghael/clojure-spa-db:latest'
-                    sh 'sudo docker push cghael/clojure-spa-db:latest'
-
-                    sh 'sudo docker build . -t clojure-spa-app'
-                    sh 'sudo docker tag clojure-spa-app cghael/clojure-spa-app:latest'
-                    sh 'sudo docker push cghael/clojure-spa-app:latest'
-                }
-            }
-        }
-
-        // stage('Deploy to Minikube') {
+        // stage('Build and Push Docker Image') {
         //     steps {
+        //         echo 'Building and pushing...'
+        //         withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB_CREDENTIALS', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USER')]) {
+        //             sh 'sudo docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD'
+        //             sh 'sudo docker build -f resources/db/Dockerfile -t clojure-spa-db .'
+        //             sh 'sudo docker tag clojure-spa-db cghael/clojure-spa-db:latest'
+        //             sh 'sudo docker push cghael/clojure-spa-db:latest'
+
+        //             sh 'sudo docker build . -t clojure-spa-app'
+        //             sh 'sudo docker tag clojure-spa-app cghael/clojure-spa-app:latest'
+        //             sh 'sudo docker push cghael/clojure-spa-app:latest'
+        //         }
+        //     }
+        // }
+
+        stage('Deploy to Minikube') {
+            steps {
                 // sh 'DECODE_TOKEN=$(echo $KUBER_TOKEN | base64 -d)'
                 // sh 'echo $KUBER_CERT | base64 -d > ca.crt'
                 // sh 'kubectl config set-cluster minikube --server=${SERVER_ENDPOINT} --certificate-authority=ca.crt'
                 // sh 'kubectl config set-credentials jenkins-sa --token=${DECODE_TOKEN}'
                 // sh 'kubectl config set-context cci --user=jenkins-sa --cluster=minikube'
                 // sh 'kubectl config use-context cci'
-                // sh 'kubectl config view'
+                sh 'kubectl config view'
                 // sh 'echo $DECODE_TOKEN'
                 // sh 'echo $KUBECONFIG'
                 // sh 'minikube ip'
@@ -83,7 +83,7 @@ pipeline {
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/deployment-app.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-app.yaml'
-        //     }
-        // }
+            }
+        }
     }
 }
