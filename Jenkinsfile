@@ -57,8 +57,8 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Deploy to Minikube') {
-            steps {
+        // stage('Deploy to Minikube') {
+        //     steps {
                 // sh 'DECODE_TOKEN=$(echo $KUBER_TOKEN | base64 -d)'
                 // sh 'echo $KUBER_CERT | base64 -d > ca.crt'
                 // sh 'kubectl config set-cluster minikube --server=${SERVER_ENDPOINT} --certificate-authority=ca.crt'
@@ -80,7 +80,7 @@ pipeline {
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/deployment-app.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-app.yaml'
-            }
-        }
+        //     }
+        // }
     }
 }
