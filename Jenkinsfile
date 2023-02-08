@@ -16,32 +16,35 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Build') {
-            steps {
-                echo 'Building...'
-                sh 'lein deps'
-                sh 'npm install'
-                sh 'lein uberjar'
-            }
-        }
-        // stage('Test') {
+
+        // stage('Build') {
         //     steps {
-        //         echo 'Testing...'
-        //         sh 'sudo docker build -f test/resources/Dockerfile -t mydb:latest .'
-        //         sh 'sudo docker run -d \
-        //                         --name db \
-        //                         --network mynetwork \
-        //                         -p 5432:5432 \
-        //                         -e POSTGRES_USER=user \
-        //                         -e POSTGRES_PASSWORD=password \
-        //                         -e POSTGRES_DB=test_database \
-        //                         mydb:latest'
-        //         sh 'lein test :unit'
-        //         sh 'lein test :integration'
-        //         sh 'sudo docker stop db'
-        //         sh 'sudo docker rm db'
+        //         echo 'Building...'
+        //         sh 'lein deps'
+        //         sh 'npm install'
+        //         sh 'lein uberjar'
         //     }
         // }
+
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh 'sudo docker build -f test/resources/Dockerfile -t mydb:latest .'
+                sh 'sudo docker run -d \
+                                --name db \
+                                --network mynetwork \
+                                -p 5432:5432 \
+                                -e POSTGRES_USER=user \
+                                -e POSTGRES_PASSWORD=password \
+                                -e POSTGRES_DB=test_database \
+                                mydb:latest'
+                sh 'lein test :unit'
+                sh 'lein test :integration'
+                sh 'sudo docker stop db'
+                sh 'sudo docker rm db'
+            }
+        }
+
         // stage('Build and Push Docker Image') {
         //     steps {
         //         echo 'Building and pushing...'
