@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: app-deployment
+  labels:
+    name: app-deployment
+    app: clojure-spa-app
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: app-pod
+      app: clojure-spa-app
+
+  template:
+    metadata:
+      name: app-pod
+      labels:
+        name: app-pod
+        app: clojure-spa-app
+    spec:
+      containers:
+        - name: clojure-spa-app
+          image: cghael/clojure-spa-app
+          ports:
+            - containerPort: 80
