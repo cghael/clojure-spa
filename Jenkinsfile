@@ -22,9 +22,8 @@ pipeline {
                 sh 'lein deps'
                 sh 'npm install'
                 sh 'lein uberjar'
-
-        //     }
-        // }
+            }
+        }
         // stage('Test') {
         //     steps {
         //         echo 'Testing...'
