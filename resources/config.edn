@@ -4,7 +4,7 @@
 
  :db {:classname "org.postgresql.Driver"
       :subprotocol "postgresql"
-      :host "localhost"
+      :host "clojure-spa-db"
       :port 5432
       :dbname "database"
       :dbtype "postgresql"
@@ -16,7 +16,7 @@
             :init-script "init.sql"
             :init-in-transaction? false
             :migration-table-name "spa.migrations"
-            :db {:host "localhost"
+            :db {:host "clojure-spa-db"
                  :port 5432
                  :dbname "database"
                  :dbtype "postgresql"
@@ -29,5 +29,5 @@
         :database-name "database"
         :username "user"
         :password "password"
-        :server-name "localhost"
+        :server-name "clojure-spa-db"
         :port-number 5432}}
