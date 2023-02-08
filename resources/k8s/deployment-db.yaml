@@ -31,3 +31,5 @@ spec:
               value: "user"
             - name: POSTGRES_PASSWORD
               value: "password"
+            - name: POSTGRES_DB
+              value: "database"
