@@ -5,7 +5,7 @@
             [clojure.string :as string]))
 
 
-(def server-uri "http://localhost:4000") ;;todo add to config
+(def server-uri "http://88.210.3.43:4000") ;;todo add to config
 
 (defn- alert-pop-up
   [result]
