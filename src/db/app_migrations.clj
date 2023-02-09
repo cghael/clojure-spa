@@ -18,5 +18,5 @@
 (defn migrations-up
   [config]
   (let [mirgate-config (:migratus config)]
-    ;; (migratus/init mirgate-config)
+    (migratus/init mirgate-config)
     (migratus/migrate mirgate-config)))

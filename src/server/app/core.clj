@@ -9,7 +9,8 @@
             [server.app.config :refer [config]]
             [taoensso.timbre :as log] 
             [db.core :refer [db]]
-            [db.app-migrations :refer [migrations-up migrations-down]]))
+            [db.app-migrations :refer [migrations-up migrations-down]]
+            [clojure.java.jdbc :as jdbc]))
 
 
 (def app (-> routes/app
@@ -44,7 +45,8 @@
   (let [status (mount/start #'config #'db #'server)
         _ (.addShutdownHook (Runtime/getRuntime) (Thread. stop!))
         _ (migrations-up config)
-        _ (log/info status)]
+        _ (log/info status)
+        _ (log/info (jdbc/query db "select * from spa.patients"))]
     status))
 
 
