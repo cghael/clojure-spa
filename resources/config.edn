@@ -30,4 +30,7 @@
         :username "user"
         :password "password"
         :server-name "db"
-        :port-number 5432}}
+        :port-number 5432}
+ 
+ :ui {:uri "http://88.210.3.43:4000"
+      :limit 10}}

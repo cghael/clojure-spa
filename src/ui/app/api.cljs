@@ -1,11 +1,10 @@
 (ns ui.app.api
-  (:require [ajax.core :refer [GET POST PUT DELETE]]
-            [ajax.edn :refer [edn-response-format edn-read]]
+  (:require [ajax.core :refer [GET POST PUT DELETE]] 
             [ui.app.state :as state]
             [clojure.string :as string]))
 
 
-(def server-uri "http://88.210.3.43:4000") ;;todo add to config
+(def server-uri (:uri @state/*config))
 
 (defn- alert-pop-up
   [result]
@@ -46,17 +45,13 @@
   (.log js/console (str "No patients found: " status " " status-text)))
 
 
-(def what-page {:first {:get-pages 2
-                        :limit 10 ;todo add to config
+(def what-page {:first {:get-pages 2 
                         :page identity}
-                :next {:get-pages 1
-                       :limit 10
+                :next {:get-pages 1 
                        :page inc}
-                :back {:get-pages 1
-                       :limit 10
+                :back {:get-pages 1 
                        :page dec}
-                :all {:get-pages 3
-                      :limit 10
+                :all {:get-pages 3 
                        :page dec}})
 
 
@@ -73,7 +68,7 @@
 (defn patient-list
   [page-key]
   (let [page-props (page-key what-page)
-        params {:limit (:limit page-props)
+        params {:limit (:limit @state/*config)
                 :page ((:page page-props) @state/*page)
                 :get-pages (:get-pages page-props)
                 :key page-key}
@@ -164,7 +159,7 @@
   (.log js/console response)
   (if (> @state/*page 1)
     (patient-list :all)
-    (patient-list :first)) ;;think about if create from != 1 page what about cash
+    (patient-list :first))
   (alert-pop-up :success))
 
 (defn- patient-create-error-handler

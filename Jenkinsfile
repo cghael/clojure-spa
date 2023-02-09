@@ -26,23 +26,23 @@ pipeline {
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         echo 'Testing...'
-        //         sh 'sudo docker build -f test/resources/Dockerfile -t mydb:latest .'
-        //         sh 'sudo docker run -d \
-        //                         --name db \
-        //                         -p 5432:5432 \
-        //                         -e POSTGRES_USER=user \
-        //                         -e POSTGRES_PASSWORD=password \
-        //                         -e POSTGRES_DB=test_database \
-        //                         mydb:latest'
-        //         sh 'lein test :unit'
-        //         sh 'lein test :integration'
-        //         sh 'sudo docker stop db'
-        //         sh 'sudo docker rm db'
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh 'sudo docker build -f test/resources/Dockerfile -t mydb:latest .'
+                sh 'sudo docker run -d \
+                                --name db \
+                                -p 5432:5432 \
+                                -e POSTGRES_USER=user \
+                                -e POSTGRES_PASSWORD=password \
+                                -e POSTGRES_DB=test_database \
+                                mydb:latest'
+                sh 'lein test :unit'
+                sh 'lein test :integration'
+                sh 'sudo docker stop db'
+                sh 'sudo docker rm db'
+            }
+        }
 
         stage('Build and Push Docker Image') {
             steps {
@@ -62,28 +62,15 @@ pipeline {
 
         stage('Deploy to Minikube') {
             steps {
-                // sh 'DECODE_TOKEN=$(echo $KUBER_TOKEN | base64 -d)'
-                // sh 'echo $KUBER_CERT | base64 -d > ca.crt'
-                // sh 'kubectl config set-cluster minikube --server=${SERVER_ENDPOINT} --certificate-authority=ca.crt'
-                // sh 'kubectl config set-credentials jenkins-sa --token=${DECODE_TOKEN}'
-                // sh 'kubectl config set-context cci --user=jenkins-sa --cluster=minikube'
-                // sh 'kubectl config use-context cci'
                 sh 'kubectl config view'
-                // sh 'echo $DECODE_TOKEN'
-                // sh 'echo $KUBECONFIG'
-                // sh 'minikube ip'
-                // sh 'export KUBECONFIG=~/config'
-                // // sh 'sudo cat ~/config'
-                // sh 'kubectl config view'
                 sh 'kubectl config use-context cicd-ctx'
-                // // sh 'kubectl config use-context cicd-ctx'
-                // sh 'kubectl get pods'
-                // sh 'eval $(minikube -p minikube docker-env)'
                 sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 sh 'kubectl apply -f resources/k8s/service-db.yaml'
                 sh 'kubectl apply -f resources/k8s/deployment-app.yaml'
-                // sh 'kubectl apply -f resources/k8s/service-app.yaml'
             }
         }
     }
 }
+
+
+// kubectl port-forward --address localhost,88.210.3.43 deployment.apps/app-deployment 4000 -n cicd-ns

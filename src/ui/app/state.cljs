@@ -2,6 +2,9 @@
   (:require [reagent.core :as r]))
 
 
+(def *config (r/atom {:uri nil
+                      :limit nil}))
+
 (def *activ-patient (r/atom nil))
 
 (def *page (r/atom 1))
