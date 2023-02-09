@@ -1,7 +1,5 @@
 (ns db.app-migrations
-  (:require ;; [config :refer [config]]
-            ;; [db.core :refer [db]]
-            [clojure.java.jdbc :as jdbc]
+  (:require [clojure.java.jdbc :as jdbc]
             [migratus.core :as migratus]))
 
 
@@ -20,9 +18,5 @@
 (defn migrations-up
   [config]
   (let [mirgate-config (:migratus config)]
-    (migratus/init mirgate-config)
+    ;; (migratus/init mirgate-config)
     (migratus/migrate mirgate-config)))
-
-;; (defn migrations-down
-;;   [config]
-;;   (migrate-down config))
