@@ -56,8 +56,6 @@ pipeline {
                     sh 'sudo docker build . -t clojure-spa-app'
                     sh 'sudo docker tag clojure-spa-app cghael/clojure-spa-app:latest'
                     sh 'sudo docker push cghael/clojure-spa-app:latest'
-
-                    sh 'ls src/db/migrations/'
                 }
             }
         }
