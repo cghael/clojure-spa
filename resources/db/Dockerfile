@@ -8,6 +8,6 @@ RUN echo "postgres ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 RUN apt-get install -y postgresql-client
 
-COPY src/db/migrations/init.sql /docker-entrypoint-initdb.d/
+COPY resources/migrations/init.sql /docker-entrypoint-initdb.d/
 
 USER postgres
