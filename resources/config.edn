@@ -12,8 +12,8 @@
       :password "password"}
 
  :migratus {:store :database
-            :migration-dir "src/db/migrations/"
-            :init-script "src/db/migrations/init.sql"
+          ;;   :migration-dir "src/db/migrations/"
+            :init-script "init.sql"
             :init-in-transaction? false
             :migration-table-name "spa.migrations"
             :db {:host "db"
