@@ -5,6 +5,11 @@ Test task for the position of middle full-stack+ web developer.
 ![Gif working app](https://github.com/cghael/clojure-spa/blob/master/resources/md-resources/screen.gif)
 
 ## Local run
+To run locally, the following changes are required in the config.unit file:
+```
+{:db {:host "db"}
+ :pool {:server-name "db"}}
+```
 
 ```
 lein uberjar
