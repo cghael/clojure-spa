@@ -24,8 +24,7 @@
                  [clojure.java-time "1.2.0"]
                  [thheller/shadow-cljs "2.20.14"]
                  [reagent "0.8.1"]
-                 [cljs-ajax "0.7.5"]
-                 [aero "1.1.6"]] 
+                 [cljs-ajax "0.7.5"]] 
 
   :main ^:skip-aot server.app.core
 

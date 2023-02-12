@@ -33,7 +33,8 @@
   [{:keys [id name last-name sex birth-date adress oms-number]}]
   (if (nil? id)
       ;; Create patient
-    (api/patient-create @*patient-values)
+    (do (swap! *patient-values dissoc :id)
+        (api/patient-create @*patient-values))
       ;; Edit patient
     (let [selected-index (.indexOf (:current-page @state/*patients) @state/*activ-patient)]
       (swap! state/*patients

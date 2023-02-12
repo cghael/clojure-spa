@@ -13,4 +13,4 @@
  
  :nrepl {:port 3333}
  
- :source-paths ["src"]}
+ :source-paths ["src", "resources"]}
