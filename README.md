@@ -7,13 +7,16 @@ Test task for the position of middle full-stack+ web developer.
 ## Local run
 To run locally, the following changes are required in the config.unit file:
 ```
-{:db {:host "db"}
- :pool {:server-name "db"}}
+{:db {:host "localhost"}
+ :pool {:server-name "localhost"}}
 ```
-
+Then you need to run postgresql in docker:
+```
+docker-compose -f resources/db/docker-compose.yml up -d
+```
+And finnaly build and run uberjar:
 ```
 lein uberjar
-docker-compose -f resources/db/docker-compose.yml up -d
 java -jar target/uberjar/clojure-spa.jar
 ```
 
