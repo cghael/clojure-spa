@@ -11,3 +11,16 @@ lein uberjar
 docker-compose -f resources/db/docker-compose.yml up -d
 java -jar target/uberjar/clojure-spa.jar
 ```
+
+# Details
+
+The application is built in the Jenkins pipeline using the Jenkins file. 
+Jenkins is installed on a remote server and the build on commit is configured.
+
+In the same place on this server the minicube is installed. 
+It raises two pods: a pod with a postgresql database and a pod with an application.
+
+To access the application, you need to forward the port on the server:
+```
+kubectl port-forward --address localhost,<server-ip> deployment.apps/app-deployment 4000 -n cicd-ns
+```
