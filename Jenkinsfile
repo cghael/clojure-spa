@@ -22,6 +22,7 @@ pipeline {
                 echo 'Building...'
                 sh 'lein deps'
                 sh 'npm install'
+                sh 'lein clean'
                 sh 'lein uberjar'
             }
         }
