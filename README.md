@@ -5,7 +5,7 @@ Test task for the position of middle full-stack+ web developer.
 ![Gif working app](https://github.com/cghael/clojure-spa/blob/master/resources/md-resources/screen.gif)
 
 ## Local run
-To run locally, the following changes are required in the config.unit file:
+To run locally, the following changes are required in the resources/config.edn file:
 ```
 {:db {:host "localhost"}
  :pool {:server-name "localhost"}}
