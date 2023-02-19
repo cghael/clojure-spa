@@ -71,7 +71,7 @@ replicaset.apps/db-deployment-fd7f6457d    1         1         1       10d
 ```
 kubectl -n cghael-clojure-spa port-forward service/app 8090:tcp
 ```
-5. Open in browser http://localhost:8080
+5. Open in browser http://localhost:8090
 6. To remove all objects from cluster use:
 ```
 kubectl delete ns cghael-clojure-spa
