@@ -64,7 +64,8 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 sh 'pwd'
-                sh 'cat /resources/k8s/new-config'
+                sh 'ls -l'
+                sh 'cat /var/lib/jenkins/workspace/clojure-spa-pipeline/resources/k8s/new-config'
                 sh 'kubectl config view --kubeconfig=/resources/k8s/new-config'
                 // sh 'kubectl config use-context cicd-ctx'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
