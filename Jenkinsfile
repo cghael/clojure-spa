@@ -63,15 +63,12 @@ pipeline {
 
         stage('Deploy to Minikube') {
             steps {
-                sh 'pwd'
-                sh 'ls -l'
-                sh 'cat $(pwd)/resources/k8s/new-config'
                 sh 'kubectl config view --kubeconfig=$(pwd)/resources/k8s/new-config'
-                // sh 'kubectl config use-context cicd-ctx'
-                // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
-                // sh 'kubectl apply -f resources/k8s/service-db.yaml'
-                // sh 'kubectl apply -f resources/k8s/deployment-app.yaml'
-                // sh 'kubectl apply -f resources/k8s/service-app.yaml'
+                sh 'kubectl config use-context cicd-ctx --kubeconfig=$(pwd)/resources/k8s/new-config'
+                sh 'kubectl apply -f resources/k8s/deployment-db.yaml --kubeconfig=$(pwd)/resources/k8s/new-config'
+                sh 'kubectl apply -f resources/k8s/service-db.yaml --kubeconfig=$(pwd)/resources/k8s/new-config'
+                sh 'kubectl apply -f resources/k8s/deployment-app.yaml --kubeconfig=$(pwd)/resources/k8s/new-config'
+                sh 'kubectl apply -f resources/k8s/service-app.yaml --kubeconfig=$(pwd)/resources/k8s/new-config'
             }
         }
     }
