@@ -3,6 +3,8 @@
 # Yet another one CRUD
 
 A CRUD single page application demonstrating full stack development on Clojure/ClojureScript with a CI pipeline in Jenkins and deploy to Kubernetes.
+The application displays a list of patients with pagination, you can create a new patient, view his card, edit the data, delete. Sorting/search by the specified fields in the patient's card is also implemented.
+Every time the application is launched, demo data is uploaded to the database.
 
 ## Stack
 
@@ -77,28 +79,32 @@ kubectl delete ns cicd-ns
 
 #### Using uberjar file and docker database image
 
+The repository has uberjar in the target/uberjar folder. If you have java installed, you can run the application locally.
+
+First you need to raise the database in the docker container:
+```
+docker-compose -f resources/db/docker-compose.yml up -d
+```
+After the container starts, you need to start the application itself:
+```
+java -jar target/uberjar/clojure-spa.jar
+```
+
 #### Using leiningen and docker database image
 
+If you want to build the application yourself and you have clojura and leiningen installed, you can build uberjar.
 
-
-
-
-
-## Local run
-To run locally, the following changes are required in the resources/config.edn file:
+First of all, the following changes are required in the resources/config.edn file:
 ```
 {:db {:host "localhost"}
  :pool {:server-name "localhost"}}
 ```
-Then you need to run postgresql in docker:
-```
-docker-compose -f resources/db/docker-compose.yml up -d
-```
-And finnaly build and run uberjar:
+After that, you can build the application for a local run:
 ```
 lein uberjar
-java -jar target/uberjar/clojure-spa.jar
 ```
+
+And then repeat the steps from the previous paragraph.
 
 # Details
 
