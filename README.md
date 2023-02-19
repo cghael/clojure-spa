@@ -1,8 +1,37 @@
-# Clojure/ClojureScript SPA
-With Jenkins pipeline and Kubernetes deployment.
-Test task for the position of middle full-stack+ web developer.
-
 ![Gif working app](https://github.com/cghael/clojure-spa/blob/master/resources/md-resources/screen.gif)
+
+# Yet another one CRUD
+
+A CRUD single page application demonstrating full stack development on Clojure/ClojureScript with a CI pipeline in Jenkins and deploy to Kubernetes.
+
+## Stack
+
+The application uses the following technologies:
+
+- Clojure (Lein + Mount + Compojure + Clojure.spec)
+- ClojureScript (Shadow-cljs + Reagent + Cljs-ajax)
+- PostgreSQL (Migratus + HikariCP + Clojure.java.jdbc)
+- Docker
+- C.I. Jenkins
+- Kubernetes
+
+## Setup and Installation
+
+For my demo, the application is built entirely in the Jenkins pipeline and deployed to a minikube
+
+
+###Minikube
+
+###Local run
+
+####Using uberjar file and docker database image
+
+####Using leiningen and docker database image
+
+
+
+
+
 
 ## Local run
 To run locally, the following changes are required in the resources/config.edn file:
