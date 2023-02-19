@@ -9,7 +9,7 @@ spec:
   type: ClusterIP
   ports:
     - name: tcp
-      port: 80
+      port: 8080
       targetPort: 4000
   selector:
     name: app-pod
