@@ -69,7 +69,7 @@ replicaset.apps/db-deployment-fd7f6457d    1         1         1       10d
 ```
 4. Now you need to forward the port to the application service:
 ```
-kubectl -n cghael-clojure-spa port-forward service/app 8080:tcp
+kubectl -n cghael-clojure-spa port-forward service/app 8090:tcp
 ```
 5. Open in browser http://localhost:8080
 6. To remove all objects from cluster use:
@@ -118,5 +118,5 @@ It raises two pods: a pod with a postgresql database and a pod with an applicati
 
 To access the application, I'm forward the port on the server like this:
 ```
-kubectl port-forward --address localhost,<server-ip> service/app 8080:tcp -n cicd-ns
+kubectl port-forward --address localhost,<server-ip> service/app 8090:tcp -n cicd-ns
 ```
