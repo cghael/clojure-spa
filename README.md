@@ -20,13 +20,13 @@ The application uses the following technologies:
 For my demo, the application is built entirely in the Jenkins pipeline and deployed to a minikube
 
 
-###Minikube
+### Minikube
 
-###Local run
+### Local run
 
-####Using uberjar file and docker database image
+#### Using uberjar file and docker database image
 
-####Using leiningen and docker database image
+#### Using leiningen and docker database image
 
 
 
