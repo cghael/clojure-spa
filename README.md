@@ -41,9 +41,9 @@ git clone git@github.com:cghael/clojure-spa.git
 cd clojure-spa
 kubectl create ns cghael-clojure-spa
 kubectl -n cghael-clojure-spa apply -f resources/k8s/deployment-db.yaml
-kubectl -n cghael-clojure-spa apply apply -f resources/k8s/service-db.yaml
-kubectl -n cghael-clojure-spa apply apply -f resources/k8s/deployment-app.yaml
-kubectl -n cghael-clojure-spa apply apply -f resources/k8s/service-app.yaml
+kubectl -n cghael-clojure-spa apply -f resources/k8s/service-db.yaml
+kubectl -n cghael-clojure-spa apply -f resources/k8s/deployment-app.yaml
+kubectl -n cghael-clojure-spa apply -f resources/k8s/service-app.yaml
 ```
 3. Check that all required objects are deployed and running in your cluster:
 ```
