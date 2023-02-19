@@ -61,7 +61,7 @@ replicaset.apps/db-deployment-fd7f6457d    1         1         1       10d
 ```
 kubectl port-forward --address localhost,<minikube_ip> service/app 80
 ```
-5. Open in browser http://localhost:80
+5. Open in browser http://localhost
 
 ### Local run
 
