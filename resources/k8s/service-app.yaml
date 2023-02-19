@@ -13,3 +13,4 @@ spec:
   selector:
     name: app-pod
     app: clojure-spa-app
+    
