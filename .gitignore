@@ -1,5 +1,4 @@
 node_modules
-public/js
 out
 .shadow-cljs
 .nrepl-port
@@ -8,8 +7,9 @@ yarn-error.log
 report.html
 .lsp/.cache
 .calva/output-window
-resources/public/js
-target
+target/uberjar/classes
+target/uberjar/stale
+target/uberjar/testapp-0.1.0-SNAPSHOT.jar
 .calva/
 .calva/output-window/output.calva-repl
 .lsp/.cache/db.transit.json
