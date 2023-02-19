@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: clojure-spa-db
-          image: cghael/clojure-spa-db
+          image: cghael/clojure-spa-db:latest
           ports:
             - containerPort: 5432
           env:

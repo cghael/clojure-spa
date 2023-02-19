@@ -23,6 +23,6 @@ spec:
     spec:
       containers:
         - name: clojure-spa-app
-          image: cghael/clojure-spa-app
+          image: cghael/clojure-spa-app:latest
           ports:
             - containerPort: 4000
