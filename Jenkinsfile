@@ -63,7 +63,8 @@ pipeline {
 
         stage('Deploy to Minikube') {
             steps {
-                sh 'kubectl -n cicd-ns config view --kubeconfig=/resources/k8s/new-config'
+                sh 'cat /resources/k8s/new-config'
+                sh 'kubectl config view --kubeconfig=/resources/k8s/new-config'
                 // sh 'kubectl config use-context cicd-ctx'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
