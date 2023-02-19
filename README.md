@@ -47,7 +47,7 @@ kubectl -n cghael-clojure-spa apply -f resources/k8s/service-app.yaml
 ```
 3. Check that all required objects are deployed and running in your cluster:
 ```
-kubectl -n cghael-clojure-spa apply -l app=clojure-spa-app get all
+kubectl -n cghael-clojure-spa -l app=clojure-spa-app get all
 ```
 You should see the following:
 ```
@@ -69,12 +69,12 @@ replicaset.apps/db-deployment-fd7f6457d    1         1         1       10d
 ```
 4. Now you need to forward the port to the application service:
 ```
-kubectl -n cghael-clojure-spa apply port-forward service/app 8080:tcp
+kubectl -n cghael-clojure-spa port-forward service/app 8080:tcp
 ```
 5. Open in browser http://localhost:8080
 6. To remove all objects from cluster use:
 ```
-kubectl delete ns cghael-clojure-spa apply
+kubectl delete ns cghael-clojure-spa
 ```
 
 ### Local run
