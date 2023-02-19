@@ -3,7 +3,9 @@
 # Yet another one CRUD
 
 A CRUD single page application demonstrating full stack development on Clojure/ClojureScript with a CI pipeline in Jenkins and deploy to Kubernetes.
+
 The application displays a list of patients with pagination, you can create a new patient, view his card, edit the data, delete. Sorting/search by the specified fields in the patient's card is also implemented.
+
 Every time the application is launched, demo data is uploaded to the database.
 
 ## Stack
@@ -37,15 +39,15 @@ kubectl config set-context minikube
 ```
 git clone git@github.com:cghael/clojure-spa.git
 cd clojure-spa
-kubectl create ns cicd-ns
-kubectl apply -f resources/k8s/deployment-db.yaml
-kubectl apply -f resources/k8s/service-db.yaml
-kubectl apply -f resources/k8s/deployment-app.yaml
-kubectl apply -f resources/k8s/service-app.yaml
+kubectl create ns cghael-clojure-spa
+kubectl -n cghael-clojure-spa apply -f resources/k8s/deployment-db.yaml
+kubectl -n cghael-clojure-spa apply apply -f resources/k8s/service-db.yaml
+kubectl -n cghael-clojure-spa apply apply -f resources/k8s/deployment-app.yaml
+kubectl -n cghael-clojure-spa apply apply -f resources/k8s/service-app.yaml
 ```
 3. Check that all required objects are deployed and running in your cluster:
 ```
-kubectl -n cicd-ns -l app=clojure-spa-app get all
+kubectl -n cghael-clojure-spa apply -l app=clojure-spa-app get all
 ```
 You should see the following:
 ```
@@ -67,12 +69,12 @@ replicaset.apps/db-deployment-fd7f6457d    1         1         1       10d
 ```
 4. Now you need to forward the port to the application service:
 ```
-kubectl -n cicd-ns port-forward service/app 8080:tcp
+kubectl -n cghael-clojure-spa apply port-forward service/app 8080:tcp
 ```
 5. Open in browser http://localhost:8080
 6. To remove all objects from cluster use:
 ```
-kubectl delete ns cicd-ns
+kubectl delete ns cghael-clojure-spa apply
 ```
 
 ### Local run
