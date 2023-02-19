@@ -17,7 +17,7 @@ The application uses the following technologies:
 
 ## Setup and Installation
 
-For my demo, the application is completely built in the Jenkins pipeline by commit and deployed to a minicube.
+For my demo, the application is completely built in the Jenkins pipeline by commit and deployed to a minikube.
 
 ![Pipeline screenshot](https://github.com/cghael/clojure-spa/blob/master/resources/md-resources/pipeline.png)
 
@@ -27,17 +27,23 @@ But you can start it in several ways:
 
 To run the application in your local minikube cluster, you can do follow:
 
-1. Clone the repository
+1. Change to minikube context
 ```
-git clone https://github.com/cghael/clojure-spa.git
+kubectl config set-context minikube
 ```
-2. Run following command:
+2. Clone the repository, create namespace and apply .yaml files
 ```
-kubectl apply -f clojure-spa/resources/k8s/
+git clone git@github.com:cghael/clojure-spa.git
+cd clojure-spa
+kubectl create ns cicd-ns
+kubectl apply -f resources/k8s/deployment-db.yaml
+kubectl apply -f resources/k8s/service-db.yaml
+kubectl apply -f resources/k8s/deployment-app.yaml
+kubectl apply -f resources/k8s/service-app.yaml
 ```
-3. Check that all required objects are deployed in your cluster:
+3. Check that all required objects are deployed and running in your cluster:
 ```
-kubectl get all
+kubectl -n cicd-ns -l app=clojure-spa-app get all
 ```
 You should see the following:
 ```
@@ -59,9 +65,13 @@ replicaset.apps/db-deployment-fd7f6457d    1         1         1       10d
 ```
 4. Now you need to forward the port to the application service:
 ```
-kubectl port-forward --address localhost,<minikube_ip> service/app 80
+kubectl -n cicd-ns port-forward service/app 8080:tcp
 ```
-5. Open in browser http://localhost
+5. Open in browser http://localhost:8080
+6. To remove all objects from cluster use:
+```
+kubectl delete ns cicd-ns
+```
 
 ### Local run
 
