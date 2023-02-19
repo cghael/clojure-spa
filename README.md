@@ -19,6 +19,7 @@ The application uses the following technologies:
 
 For my demo, the application is built entirely in the Jenkins pipeline and deployed to a minikube
 
+![Pipeline screenshot](https://github.com/cghael/clojure-spa/blob/master/resources/md-resources/pipeline.png)
 
 ### Minikube
 
