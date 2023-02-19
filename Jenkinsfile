@@ -65,8 +65,8 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'ls -l'
-                sh 'cat ${pwd}/resources/k8s/new-config'
-                sh 'kubectl config view --kubeconfig=/var/lib/jenkins/workspace/clojure-spa-pipeline/resources/k8s/new-config'
+                sh 'cat $(pwd)/resources/k8s/new-config'
+                sh 'kubectl config view --kubeconfig=$(pwd)/resources/k8s/new-config'
                 // sh 'kubectl config use-context cicd-ctx'
                 // sh 'kubectl apply -f resources/k8s/deployment-db.yaml'
                 // sh 'kubectl apply -f resources/k8s/service-db.yaml'
