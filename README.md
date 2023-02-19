@@ -17,7 +17,7 @@ The application uses the following technologies:
 
 ## Setup and Installation
 
-For my demo, the application is built entirely in the Jenkins pipeline and deployed to a minikube
+For my demo, the application is completely built in the Jenkins pipeline by commit and deployed to a minicube.
 
 ![Pipeline screenshot](https://github.com/cghael/clojure-spa/blob/master/resources/md-resources/pipeline.png)
 
