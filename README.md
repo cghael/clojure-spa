@@ -17,7 +17,8 @@ The application uses the following technologies:
 - PostgreSQL (Migratus + HikariCP + Clojure.java.jdbc)
 - Docker
 - C.I. Jenkins
-- Kubernetes
+- Kubernete
+- Ansible
 
 ## Setup and Installation
 
@@ -115,6 +116,8 @@ Jenkins is installed on a remote server and the build on commit is configured.
 
 In the same place on this server the minikube is installed. 
 It raises two pods: a pod with a postgresql database and a pod with an application.
+
+Authorization in the minikube occurs using the kubeconfig file, encrypted with ansible-vault and decrypted in the pipeline.
 
 To access the application, I'm forward the port on the server like this:
 ```
